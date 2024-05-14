@@ -16,12 +16,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('enter_stud_det');
+    return view('main');
 
 });
 Route::post('/leavereqs', [LeavereqController::class, 'insert'])->name('leavereqs');
 Route::post('/signup', [StudentController::class, 'insert'])->name('signup');
 Route::get('/login', [StudentController::class,'login'])->name('login');
+Route::get('/main', [StudentController::class,'signup'])->name('signup');
 Route::post('/login', [StudentController::class, 'loginfinal'])->name('loginfinal'); 
 Route::get('/leavereqs', [LeavereqController::class,'show_leave_det'])->name('leavereqs');
 

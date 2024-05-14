@@ -44,6 +44,9 @@ class StudentController extends Controller
     public function login() { 
         return view('login'); 
     }
+    public function signup() { 
+        return view('main'); 
+    }
     public function loginfinal(Request $request) { 
         $rollno = $request->input('rollno');
         if(DB::table('students')->where('rollno',$rollno)->exists())

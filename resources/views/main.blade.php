@@ -4,14 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
-    <style>
-        body{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            flex-direction:column;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/login_signup.css">
     <script>
         var courseObject = {
         "B.Tech.": {
@@ -70,53 +63,79 @@
     </script>
 </head>
 <body>
-    <h1>SignUp</h1>
-    <form method="post" action="/signup" id="signup">
-        @csrf
-        <input type="text" name="rollno" placeholder="Roll Number">
-        <br><br>
-        <input type="text" name="name" placeholder="Full Name (as in ID card)">
-        <br><br>
-        <input type="text" name="phoneno" placeholder="Phone Number">
-        <br><br>
-        <input type="text" name="email" placeholder="E-Mail">
-        <br><br>
-        <select id="course" name="course">
-            <option value="" selected="selected">Select Course</option>
-        </select>
-        <br><br>
-        <select id="batch" name="batch">
-            <option value="" selected="selected">Select Batch</option>
-        </select>    
-        <br><br>
-        <select id="dept" name="dept">
-            <option value="" selected="selected">Select Department</option>
-        </select>    
-        <br><br>
-        
-        <select id="gender" name="gender">
-            <option value="" disabled selected hidden>Choose Gender</option>
-            <option>Male</option>
-            <option>Female</option>
-        </select>
-        <br><br>
-        <select id="hostelname" name="hostelname">
-        <option value="" disabled selected hidden>Choose Hostel Name</option>
-            <option>Bharani Hostel</option>
-            <option>Bhavani Hostel</option>
-            <option>Moyar Hostel</option>
-        </select>
-        <br><br>
-        <input type="text" id="roomno" name="roomno" placeholder="Enter Hostel Room Number">
-        <br><br>
-        <input type="password" id="password" name="password" placeholder="Enter Password">
-        <br><br>
-        <input type="Submit" id="submit" value="Submit" style="margin-left:55px">
-
-        <br><br>
-        <a href="{{ route('login') }}">Login</a>
-
+    <div class="container">
+        <div class="image-container">
+            <img src="assets/images/signup.jpeg" alt="Sign Up Image" class="image">
+        </div>
+        <div class="form-container">
+            <h1>SIGN UP</h1>
+            <form method="post" action="/signup" id="signup">
+                @csrf
+                <div class="form-group">
+                    <label for="rollno">Roll Number</label>
+                    <input type="text" name="rollno" id="rollno" placeholder="Roll Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="name">Full Name (as in ID card)</label>
+                    <input type="text" name="name" id="name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneno">Phone Number</label>
+                    <input type="text" name="phoneno" id="phoneno" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-Mail</label>
+                    <input type="text" name="email" id="email" placeholder="E-Mail" required>
+                </div>
+                <div class="form-group">
+                    <label for="course">Course</label>
+                    <select id="course" name="course">
+                        <option value="" selected="selected">Select Course</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="batch">Batch</label>
+                    <select id="batch" name="batch">
+                        <option value="" selected="selected">Select Batch</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dept">Department</label>
+                    <select id="dept" name="dept">
+                        <option value="" selected="selected">Select Department</option>
+                    </select> 
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                        <option value="" disabled selected hidden>Choose Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="hostelname">Hostel Name</label>
+                    <select id="hostelname" name="hostelname" required>
+                        <option value="" selected disabled hidden>Choose Hostel Name</option>
+                        <option value="Bharani Hostel">Bharani Hostel</option>
+                        <option value="Bhavani Hostel">Bhavani Hostel</option>
+                        <option value="Moyar Hostel">Moyar Hostel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="roomno">Hostel Room Number</label>
+                    <input type="text" id="roomno" name="roomno" placeholder="Enter Hostel Room Number" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                </div>
+                <div class="form-group button">
+                    <input type="submit" id="submit" value="Sign Up">
+                </div>
+                <div class="text-below-image">Have an account already? <a href="{{ route('login') }}">Login</a></div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
-
- 
