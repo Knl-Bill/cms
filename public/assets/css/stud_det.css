@@ -1,0 +1,24 @@
+.fold-table{
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 38px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+.fold{
+  display: flex;
+  justify-content: space-around;
+}
+.heading{
+  display: flex;
+  justify-content: center;
+  font-family: "Helvetica Neue",Helvetica,Arial;
+}
+.buttons{
+  display: flex;
+  gap:10px;
+}
