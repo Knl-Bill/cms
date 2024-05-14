@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('main');
+    return view('enter_stud_det');
 
 });
 Route::post('/leavereqs', [LeavereqController::class, 'insert'])->name('leavereqs');
