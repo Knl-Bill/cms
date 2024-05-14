@@ -29,7 +29,9 @@
                 <div class="form-group button">
                     <input type="submit" id="submit" value="Login">
                 </div>
-                <div class="text-below-image">Don't have an account? <a href="{{ route('signup') }}">Sign Up</a></div>
+                <div class="text-below-image">
+                    Don't have an account? <a href="{{ route('signup') }}">Sign Up</a>
+                </div>
             </form>
         </div>
     </div>
