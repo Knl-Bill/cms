@@ -2,6 +2,7 @@
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LeavereqController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Logins\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +17,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('main');
+    return view('Logins.main');
 
 });
+
+// Login Controller
+Route::get('/AdminLogin',[LoginController::class,'AdminLogin'])->name('AdminLogin');
+Route::get('/StudentLogin',[LoginController::class,'StudentLogin'])->name('StudentLogin');
+Route::get('/SecurityLogin',[LoginController::class,'SecurityLogin'])->name('SecurityLogin');
+Route::get('/StudentSignUp',[LoginController::class,'StudentSignUp'])->name('StudentSignUp');
+
 Route::post('/leavereqs', [LeavereqController::class, 'insert'])->name('leavereqs');
 Route::post('/signup', [StudentController::class, 'insert'])->name('signup');
 Route::get('/login', [StudentController::class,'login'])->name('login');
