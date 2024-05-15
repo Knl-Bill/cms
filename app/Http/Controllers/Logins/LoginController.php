@@ -23,4 +23,8 @@ class LoginController extends Controller
     {
         return view('Logins.StudentSignUp');
     }
+    public function SecurityDashboard()
+    {
+        return view('Logins.SecurityPages.Landing');
+    }
 }
