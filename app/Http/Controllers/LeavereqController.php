@@ -11,7 +11,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Hash;
 use Carbon\Carbon;
-
+use File;
 class LeavereqController extends Controller
 {
     /**
@@ -21,19 +21,41 @@ class LeavereqController extends Controller
      */
     public function insert(Request $request)
     {
-        $rollno = $request->input('rollno');
-        $name= $request->input('name');
-        $phoneno= $request->input('phoneno');
-        $placeofvisit= $request->input('placeofvisit');
-        $purpose= $request->input('purpose');
-        $outdate= Carbon::parse($request->input('outdate'))->format('Y-m-d');
-        $outtime= Carbon::parse($request->input('outime'))->format('H:i:s');
-        $indate= Carbon::parse($request->input('indate'))->format('Y-m-d');
-        $intime= Carbon::parse($request->input('intime'))->format('H:i:s');
-        $noofdays= $request->input('noofdays');
-        DB::insert('insert into leavereqs (rollno,name,phoneno,placeofvisit,purpose,outdate,outime
-        ,indate,intime,noofdays) values(?,?,?,?,?,?,?,?,?,?)',[$rollno,$name,
-        $phoneno,$placeofvisit,$purpose,$outdate,$outtime,$indate,$intime,$noofdays] );
+        $result=new Leavereq();
+        $result->rollno=$request->rollno;
+        $result->name=$request->name;
+        $result->phoneno=$request->phoneno;
+        $result->placeofvisit=$request->placeofvisit;
+        $result->purpose=$request->purpose;
+        $result->outdate=$request->outdate;
+        $result->outime=$request->outime;
+        $result->indate=$request->indate;
+        $result->intime=$request->intime;
+        $result->noofdays=$request->noofdays;
+        // $name= $request->input('name');
+        // $phoneno= $request->input('phoneno');
+        // $placeofvisit= $request->input('placeofvisit');
+        // $purpose= $request->input('purpose');
+        // $outdate= Carbon::parse($request->input('outdate'))->format('Y-m-d');
+        // $outtime= Carbon::parse($request->input('outime'))->format('H:i:s');
+        // $indate= Carbon::parse($request->input('indate'))->format('Y-m-d');
+        // $intime= Carbon::parse($request->input('intime'))->format('H:i:s');
+        // $noofdays= $request->input('noofdays');        
+        if ($request->hasFile('image')) 
+        {
+            $image = $request->file('image');
+            $filename = $result->rollno . '_' . $result->outdate;  
+            $photoPath = $image->storeAs('leavereq_emails', $filename, 'public');
+        } 
+        else 
+        {
+            $photoPath = null;
+        }
+        $result->image = $photoPath;
+        $result->save();
+        // DB::insert('insert into leavereqs (rollno,name,phoneno,placeofvisit,purpose,outdate,outime
+        // ,indate,intime,noofdays,path) values(?,?,?,?,?,?,?,?,?,?,?)',[$rollno,$name,
+        // $phoneno,$placeofvisit,$purpose,$outdate,$outtime,$indate,$intime,$noofdays,$photoPath] );
         echo "Record inserted successfully.<br/>";   
     }
 

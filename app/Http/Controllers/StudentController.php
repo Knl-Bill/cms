@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
 use App\Models\student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +13,10 @@ use Hash;
 
 class StudentController extends Controller
 {
-    
     public function insertform()
     {
         return view('main');
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -26,6 +24,25 @@ class StudentController extends Controller
      */
     public function insert(Request $request)
     {
+        $rules = [
+            'email' => 'required|email|unique:students',
+            'name' => 'required|string|max:255',
+            'phoneno' => 'required| min:10 |max:10| unique:students',
+            'rollno'=>'required|string|min:9|max:9|unique:students',
+            'password' => 'required|min:8',
+            'confirmpass' => 'required|same:password',
+            'course' => 'required',
+            'gender' => 'required',
+            'batch' => 'required',
+            'dept' => 'required',
+            'hostelname' => 'required',
+            'roomno' => 'required',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) 
+        {
+            return redirect('main')->withErrors($validator)->withInput();
+        }
         $rollno = $request->input('rollno');
         $name= $request->input('name');
         $phoneno= $request->input('phoneno');
@@ -47,29 +64,30 @@ class StudentController extends Controller
     public function signup() { 
         return view('main'); 
     }
-    public function loginfinal(Request $request) { 
-        $rollno = $request->input('rollno');
-        if(DB::table('students')->where('rollno',$rollno)->exists())
+    public function loginfinal(Request $request) 
+    { 
+        $rules = [
+            'rollno'=>'required|string|min:9|max:9|exists:students',
+            'password' => 'required|min:8',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) 
         {
-            $password= $request->input('password');
-            
-            $user = DB::table('students')->where('rollno', $rollno)->value('password');
-            // echo  $hashedpassword;
-            // echo '\n';
-            // echo $user->password;
-            if(HASH::check($password,$user))
-            {
-                return view('stu_dashboard');
-            }
-            else
-            {
-                echo 'Wrong password';
-            }
-            
+            return redirect('login')->withErrors($validator)->withInput();
         }
         else
-            echo 'User not found';
-    }  
-       
-    
+        {
+            $rollno = $request->input('rollno');
+            if(DB::table('students')->where('rollno',$rollno)->exists())
+            {
+                $password= $request->input('password');
+                $user = DB::table('students')->where('rollno', $rollno)->value('password');
+                if(HASH::check($password,$user))
+                    return view('stu_dashboard');
+                else
+                    echo 'Wrong password';
+            }
+        }
+            
+    }      
 }

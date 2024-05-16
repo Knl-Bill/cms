@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SignUp</title>
+    
     <link rel="stylesheet" href="assets/css/login_signup.css">
     <script>
         var courseObject = {
@@ -68,72 +69,125 @@
             <img src="assets/images/signup.jpeg" alt="Sign Up Image" class="image">
         </div>
         <div class="form-container">
-            <h1>SIGN UP</h1>
+            <h1 class="font">SIGN UP</h1>
             <form method="post" action="/signup" id="signup">
                 @csrf
                 <div class="form-group">
-                    <label for="rollno">Roll Number</label>
+                    <label for="rollno" class="font">Roll Number</label>
                     <input type="text" name="rollno" id="rollno" placeholder="Roll Number" required>
+                    @if($errors->has('rollno'))
+                        <span class="text-danger">{{ $errors->first('rollno') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="name">Full Name (as in ID card)</label>
+                    <label for="name" class="font">Full Name (as in ID card)</label>
                     <input type="text" name="name" id="name" placeholder="Full Name" required>
+                    @if($errors->has('name'))
+                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="phoneno">Phone Number</label>
+                    <label for="phoneno" class="font">Phone Number</label>
                     <input type="text" name="phoneno" id="phoneno" placeholder="Phone Number" required>
+                    @if($errors->has('phoneno'))
+                        <span class="text-danger">{{ $errors->first('phoneno') }}</span>
+                    @endif
                 </div>
-                <div class="form-group">
-                    <label for="email">E-Mail</label>
+                <div class="form-group" >
+                    <label for="email" class="font">E-Mail</label>
                     <input type="text" name="email" id="email" placeholder="E-Mail" required>
+                    @if($errors->has('email'))
+                        <span class="text-danger">{{ $errors->first('email') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="course">Course</label>
-                    <select id="course" name="course">
+                    <label for="course" class="font">Course</label>
+                    <select id="course" name="course" required>
                         <option value="" selected="selected">Select Course</option>
                     </select>
+                    @if($errors->has('course'))
+                        <span class="text-danger">{{ $errors->first('course') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="batch">Batch</label>
-                    <select id="batch" name="batch">
+                    <label for="batch" class="font">Batch</label>
+                    <select id="batch" name="batch" required>
                         <option value="" selected="selected">Select Batch</option>
                     </select>
+                    @if($errors->has('batch'))
+                        <span class="text-danger">{{ $errors->first('batch') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="dept">Department</label>
-                    <select id="dept" name="dept">
+                    <label for="dept" class="font">Department</label>
+                    <select id="dept" name="dept" required>
                         <option value="" selected="selected">Select Department</option>
                     </select> 
+                    @if($errors->has('dept'))
+                        <span class="text-danger">{{ $errors->first('dept') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="gender">Gender</label>
-                    <select id="gender" name="gender">
+                    <label for="gender" class="font">Gender</label>
+                    <select id="gender" name="gender" required>
                         <option value="" disabled selected hidden>Choose Gender</option>
                         <option>Male</option>
                         <option>Female</option>
                     </select>
+                    @if($errors->has('gender'))
+                        <span class="text-danger">{{ $errors->first('gender') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="hostelname">Hostel Name</label>
+                    <label for="hostelname" class="font">Hostel Name</label>
                     <select id="hostelname" name="hostelname" required>
                         <option value="" selected disabled hidden>Choose Hostel Name</option>
                         <option value="Bharani Hostel">Bharani Hostel</option>
                         <option value="Bhavani Hostel">Bhavani Hostel</option>
                         <option value="Moyar Hostel">Moyar Hostel</option>
                     </select>
+                    @if($errors->has('hostelname'))
+                        <span class="text-danger">{{ $errors->first('hostelname') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="roomno">Hostel Room Number</label>
+                    <label for="roomno" class="font">Hostel Room Number</label>
                     <input type="text" id="roomno" name="roomno" placeholder="Enter Hostel Room Number" required>
+                    @if($errors->has('roomno'))
+                        <span class="text-danger">{{ $errors->first('roomno') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password" class="font">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                    @if($errors->has('password'))
+                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="password" class="font">Confirm Password</label>
+                    <input type="password" id="password" name="confirmpass" placeholder="Enter Password Again" required>
+                    @if($errors->has('confirmpass'))
+                        <span class="text-danger">{{ $errors->first('confirmpass') }}</span>
+                    @endif
                 </div>
                 <div class="form-group button">
                     <input type="submit" id="submit" value="Sign Up">
                 </div>
-                <div class="text-below-image">Have an account already? <a href="{{ route('login') }}">Login</a></div>
+                <!-- @if ($errors->any())
+                    <div class="alertalert-danger ">
+                        <h3 class="font">Error..Please Try Again</h3>
+                        <div class="error"  >
+                            @foreach ($errors->all() as $error)
+                                <div class="mssg"  >
+                                    <img class="error_img" src="assets/images/Error.webp" alt="">
+                                    <p class="err_p"> {{ $error }} </p>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif -->
+                <div class="text-below-image">Have an account already? <a class="font" href="{{ route('login') }}">Login</a></div>
             </form>
         </div>
     </div>

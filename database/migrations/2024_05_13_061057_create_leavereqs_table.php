@@ -25,6 +25,9 @@ return new class extends Migration
             $table->date('indate');
             $table->time('intime');
             $table->string('noofdays');
+            $table->string('image');
+            $table->integer('status')->default(0);
+            $table->timestamps();
         });
     }
 
