@@ -3,6 +3,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LeavereqController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Logins\LoginController;
+use App\Http\Controllers\Logins\SecurityLogin;
+use App\Http\Controllers\Logins\Security\SecurityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,18 @@ Route::get('/AdminLogin',[LoginController::class,'AdminLogin'])->name('AdminLogi
 Route::get('/StudentLogin',[LoginController::class,'StudentLogin'])->name('StudentLogin');
 Route::get('/SecurityLogin',[LoginController::class,'SecurityLogin'])->name('SecurityLogin');
 Route::get('/StudentSignUp',[LoginController::class,'StudentSignUp'])->name('StudentSignUp');
+Route::get('/SecurityDashboard',[LoginController::class,'SecurityDashboard'])->name('SecurityDashboard');
+
+
+// SecurityLogin Controller
+Route::post('/SecurityLoginVerify',[SecurityLogin::class,'SecurityLoginVerify'])->name('SecurityLoginVerify');
+Route::get('/SecuritySession',[SecurityLogin::class,'SecuritySession'])->name('SecuritySession');
+Route::get('/Logout',[SecurityController::class,'Logout'])->name('Logout');
+
+// Security Controller
+Route::get('/OutingText',[SecurityController::class,'OutingText'])->name('OutingText');
+Route::get('/LeaveText',[SecurityController::class,'LeaveText'])->name('LeaveText');
+
 
 Route::post('/leavereqs', [LeavereqController::class, 'insert'])->name('leavereqs');
 Route::post('/signup', [StudentController::class, 'insert'])->name('signup');
