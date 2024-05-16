@@ -62,11 +62,11 @@
         </tbody>
       </table>
         <div>
-            <img src="#" alt="email screenshot">
+            <img src="storage/{{$stud->image}}" alt="email screenshot" style="width:400px;height:100px;">
         </div> 
         <div class="buttons">
           <div>
-              <button id="{{$stud->rollno}}" href="#" style="background-color:lime;"> Approve </button>
+              <button id="{{$stud->rollno}}" style="background-color:lime;"> Approve </button>
           </div> 
           <div>
               <button id="{{$stud->rollno}}" href="#" style="background-color:red;"> Decline </button>
