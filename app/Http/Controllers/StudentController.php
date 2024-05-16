@@ -15,7 +15,7 @@ class StudentController extends Controller
 {
     public function insertform()
     {
-        return view('main');
+        return view('Login.StudentSignUp');
     }
     /**
      * Show the form for creating a new resource.
@@ -59,10 +59,10 @@ class StudentController extends Controller
         echo "Record inserted successfully.<br/>";   
     }
     public function login() { 
-        return view('login'); 
+        return view('Logins.Student'); 
     }
     public function signup() { 
-        return view('main'); 
+        return view('Logins.StudentSignUp'); 
     }
     public function loginfinal(Request $request) 
     { 
