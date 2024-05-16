@@ -34,6 +34,7 @@
                     {
                         // If logout successful, redirect to home page
                         window.location.reload();
+                        window.location.href = '/';
                     } 
                     else 
                     {
