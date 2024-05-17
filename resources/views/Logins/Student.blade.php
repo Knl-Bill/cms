@@ -13,7 +13,7 @@
         </div>
         <div class="form-container">
             <h1 class="font">LOGIN</h1>
-            <form method="post" action="/login" id="signup">
+            <form method="post" action="/StudentLoginVerify" id="signup">
                 @csrf
                 <div class="form-group">
                     <label for="rollno" class="font">Roll Number</label>
@@ -35,7 +35,7 @@
                 <div class="form-group button">
                     <input type="submit" id="submit" value="Login">
                 </div>
-                <div class="text-below-image">Don't have an account? <a href="{{ route('signup') }}">Sign Up</a></div>
+                <div class="text-below-image">Don't have an account? <a href="{{ route('StudentSignUp') }}">Sign Up</a></div>
             </form>
         </div>
     </div>
