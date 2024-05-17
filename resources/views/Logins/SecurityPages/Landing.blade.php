@@ -41,9 +41,9 @@
                         // If logout failed, handle error
                         console.error('Logout failed');
                     }
-                })
-                .catch(error => {
-                    console.error('Error during logout:', error);
+            })
+            .catch(error => {
+                console.error('Error during logout:', error);
             });
         });
 

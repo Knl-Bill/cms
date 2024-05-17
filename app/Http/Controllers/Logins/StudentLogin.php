@@ -8,33 +8,33 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
-class SecurityLogin extends Controller
+class StudentLogin extends Controller
 {
     //
-    public function SecurityDashboard()
+    public function StudentDashboard()
     {
-        return view('Logins.SecurityPages.Landing');
+        return view('Logins.StudentPages.StudentDashboard');
     }
-    public function SecurityLoginVerify(Request $request)
+    public function StudentLoginVerify(Request $request)
     {
         $request->validate([
-            'phoneno' => 'required',
+            'rollno' => 'required',
             'password' => 'required',
         ]);
 
-        $phoneNumber = $request->input('phoneno');
+        $rollno = $request->input('rollno');
         $password = $request->input('password');
 
         // Retrieve the user by their phone number
-        $user = DB::table('security_login')->where('phoneno', $phoneNumber)->first();
+        $user = DB::table('students')->where('rollno', $rollno)->first();
         if($user) 
         {
             // If the user exists, check if the password matches
-            if($password === $user->password) 
+            if(HASH::check($password,$user->password)) 
             {
                 // Password matches, redirect to dashboard
                 Session::put('user',$user);
-                return redirect()->route('SecurityDashboard');
+                return redirect()->route('StudentDashboard');
             } 
             else 
             {
@@ -48,7 +48,7 @@ class SecurityLogin extends Controller
             return redirect()->back()->with('error', 'User not found');
         }
     }
-    public function SecuritySession() 
+    public function StudentSession() 
     {
         $user = Session::get('user');
         if($user)
@@ -56,7 +56,7 @@ class SecurityLogin extends Controller
         else   
             return "Guest";
     }
-    public function SecurityLogout()
+    public function StudentLogout()
     {
         Session::forget('user');
         return redirect('/');

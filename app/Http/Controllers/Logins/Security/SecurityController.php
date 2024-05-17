@@ -16,9 +16,4 @@ class SecurityController extends Controller
     {
         return view('Logins/SecurityPages.Leave.TextInput');
     }
-    public function Logout()
-    {
-        Session::forget('user');
-        return redirect('/');
-    }
 }
