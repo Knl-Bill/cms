@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Logins;
-
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,17 +11,14 @@ use Illuminate\Support\Facades\Session;
 class SecurityLogin extends Controller
 {
     //
-    public function SecurityDashboard()
-    {
-        return view('Logins.SecurityPages.Landing');
-    }
     public function SecurityLoginVerify(Request $request)
     {
         $request->validate([
-            'phoneno' => 'required',
+            'phoneno' => 'required|min:10|max:10',
             'password' => 'required',
         ]);
-
+        //$validator = Validator::make($request->all(), $rules);
+       
         $phoneNumber = $request->input('phoneno');
         $password = $request->input('password');
 
@@ -39,15 +36,16 @@ class SecurityLogin extends Controller
             else 
             {
                 // Password does not match, show error message
-                return redirect()->back()->with('error', 'Wrong password');
+                return back()->withInput()->withErrors(['password' => 'Wrong Password!']);
             }
         } 
         else 
         {
             // User not found, show error message
-            return redirect()->back()->with('error', 'User not found');
+            return back()->withInput()->withErrors(['phoneno' => 'User does not Exist!']);
         }
     }
+    
     public function SecuritySession() 
     {
         $user = Session::get('user');
@@ -55,10 +53,5 @@ class SecurityLogin extends Controller
             return $user->name;
         else   
             return "Guest";
-    }
-    public function SecurityLogout()
-    {
-        Session::forget('user');
-        return redirect('/');
     }
 }

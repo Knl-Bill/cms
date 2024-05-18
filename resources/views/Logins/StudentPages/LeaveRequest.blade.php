@@ -18,9 +18,14 @@
     <h1>Leave Request</h1>
     <br><br>
     <div class="status">
-        <button>View Status of Old Requests</button>
+        <a href="{{ route('leavereqshist') }}">See Your Leave Status</a>
     </div>
     <br><br>
+    @if (Session::get('success'))
+        <span class="text-safe" role="alert">
+            {{ Session::get('success') }}
+        </span>
+    @endif
     <form method="post" action="/InsertLeaveRequest" id="leavereq" enctype="multipart/form-data">
         @csrf
         <label for="rollno">Roll No: - </label>

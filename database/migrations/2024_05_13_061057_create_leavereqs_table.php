@@ -26,7 +26,8 @@ return new class extends Migration
             $table->time('intime');
             $table->string('noofdays');
             $table->string('image');
-            $table->integer('status')->default(0);
+            $table->integer('faculty_adv')->default(0);
+            $table->integer('warden')->default(0);
             $table->timestamps();
         });
     }

@@ -187,7 +187,7 @@
                         </div>
                     </div>
                 @endif -->
-                <div class="text-below-image">Have an account already? <a class="font" href="{{ route('login') }}">Login</a></div>
+                <div class="text-below-image">Have an account already? <a class="font" href="{{ route('StudentLogin') }}">Login</a></div>
             </form>
         </div>
     </div>

@@ -11,7 +11,12 @@
         <div class="image-container">
             <img src="assets/images/signup.jpeg" alt="Sign Up Image" class="image">
         </div>
-        <div class="form-container">
+        <div class="form-container"> 
+            @if (Session::get('success'))
+                <span class="text-safe" role="alert">
+                    {{ Session::get('success') }}
+                </span>
+            @endif
             <h1 class="font">LOGIN</h1>
             <form method="post" action="/StudentLoginVerify" id="signup">
                 @csrf
@@ -30,7 +35,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <a href="" class="font">Forgot Password?</a>
+                    <a href="{{ route('forget-password') }}" class="font" style="font-size:14px;">Forgot Password?</a>
                 </div>
                 <div class="form-group button">
                     <input type="submit" id="submit" value="Login">

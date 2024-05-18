@@ -73,7 +73,7 @@ class StudentController extends Controller
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) 
         {
-            return redirect('login')->withErrors($validator)->withInput();
+            return redirect('login')->withInput()->withErrors($validator);
         }
         else
         {
@@ -83,9 +83,9 @@ class StudentController extends Controller
                 $password= $request->input('password');
                 $user = DB::table('students')->where('rollno', $rollno)->value('password');
                 if(HASH::check($password,$user))
-                    return view('stu_dashboard');
+                    return redirect()->route('StudentDashboard');
                 else
-                    echo 'Wrong password';
+                    return back()->withInput()->withErrors(['password' => 'Wrong Password!']);
             }
         }
             

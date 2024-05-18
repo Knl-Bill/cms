@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Logins;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -17,35 +18,32 @@ class StudentLogin extends Controller
     }
     public function StudentLoginVerify(Request $request)
     {
-        $request->validate([
-            'rollno' => 'required',
-            'password' => 'required',
-        ]);
-
-        $rollno = $request->input('rollno');
-        $password = $request->input('password');
-
-        // Retrieve the user by their phone number
-        $user = DB::table('students')->where('rollno', $rollno)->first();
-        if($user) 
+        $rules = [
+            'rollno'=>'required|string|min:9|max:9|exists:students',
+            'password' => 'required|min:8',
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) 
         {
-            // If the user exists, check if the password matches
-            if(HASH::check($password,$user->password)) 
+            return redirect('login')->withInput()->withErrors($validator);
+        }
+        else
+        {
+            $rollno = $request->input('rollno');
+            $user1 = DB::table('students')->where('rollno', $rollno)->first();
+            if(DB::table('students')->where('rollno',$rollno)->exists())
             {
-                // Password matches, redirect to dashboard
-                Session::put('user',$user);
-                return redirect()->route('StudentDashboard');
-            } 
-            else 
-            {
-                // Password does not match, show error message
-                return redirect()->back()->with('error', 'Wrong password');
+                $password= $request->input('password');
+                $user = DB::table('students')->where('rollno', $rollno)->value('password');
+                if(HASH::check($password,$user))
+                {
+                    Session::put('user',$user1);
+                    return redirect()->route('StudentDashboard');
+                }
+                    
+                else
+                    return back()->withInput()->withErrors(['password' => 'Wrong Password!']);
             }
-        } 
-        else 
-        {
-            // User not found, show error message
-            return redirect()->back()->with('error', 'User not found');
         }
     }
     public function StudentSession() 
