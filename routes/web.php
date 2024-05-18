@@ -10,6 +10,8 @@ use App\Http\Controllers\Logins\Security\SecurityController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\stud_profile;
 use App\Http\Controllers\Logins\StudentLogin;
+use App\Http\Controllers\Logins\Students\OutingHistory;
+use App\Http\Controllers\Logins\Security\OutingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +56,13 @@ Route::post('StudentLoginVerify',[StudentLogin::class,'StudentLoginVerify'])->na
 Route::get('StudentSession',[StudentLogin::class,'StudentSession'])->name('StudentSession');
 Route::get('StudentLogout',[StudentLogin::class,'StudentLogout'])->name('StudentLogout');
 Route::get('StudentProfile',[StudentLogin::class,'StudentProfile'])->name('StudentProfile');
+
+// Student Page's Outing Controller
+Route::get('/GetOutings',[OutingHistory::class,'GetOutings'])->name('GetOutings');
+
+
+// Security Page's Outing Controller
+Route::post('/InsertOuting',[OutingController::class,'InsertOuting'])->name('InsertOuting');
 
 
 // Student Controllers
