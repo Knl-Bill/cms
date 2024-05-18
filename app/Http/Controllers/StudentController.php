@@ -53,10 +53,12 @@ class StudentController extends Controller
         $gender= $request->input('gender');
         $hostelname= $request->input('hostelname');
         $roomno= $request->input('roomno');
+        $faculty_advisor=$request->input('faculty_advisor');
+        $warden=$request->input('warden');
         $password= $request->input('password');
         $hashedpassword=Hash::make($password);
-        DB::insert('insert into students (rollno,name,phoneno,email,course,batch,dept,gender,hostelname,roomno,password) values(?,?,?,?,?,?,?,?,?,?,?)',[$rollno,$name,$phoneno,$email,$course,$batch,$dept,$gender,$hostelname,$roomno,$hashedpassword] );
-        echo "Record inserted successfully.<br/>";   
+        DB::insert('insert into students (rollno,name,phoneno,email,course,batch,dept,gender,hostelname,roomno,faculty_advisor,warden,password) values(?,?,?,?,?,?,?,?,?,?,?,?,?)',[$rollno,$name,$phoneno,$email,$course,$batch,$dept,$gender,$hostelname,$roomno,$faculty_advisor,$warden,$hashedpassword] );
+        return redirect()->route('StudentLogin')->with('success',"SignUp successful ! Please Login to continue...");   
     }
     public function login() { 
         return view('Logins.Student'); 

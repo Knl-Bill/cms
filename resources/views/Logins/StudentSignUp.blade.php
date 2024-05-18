@@ -158,6 +158,29 @@
                     @endif
                 </div>
                 <div class="form-group">
+                    <label for="faculty_advisor" class="font">Faculty Advisor</label>
+                    <select id="faculty_advisor" name="faculty_advisor" required>
+                        <option value="" selected disabled hidden>Select Your Faculty Advisor</option>
+                        <option value="sanjay.bankapur@nitpy.ac.in">Dr. Sanjay Bankapur</option>
+                        <option value="lakshmi@nitpy.ac.in">Dr. Lakshmi Sutha . G</option>
+                    </select>
+                    @if($errors->has('faculty_advisor'))
+                        <span class="text-danger">{{ $errors->first('faculty_advisor') }}</span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="warden" class="font">Warden</label>
+                    <select id="warden" name="warden" required>
+                        <option value="" selected disabled hidden>Select Your Warden</option>
+                        <option value="chandrashekar.r@nitpy.ac.in">Dr. Chandrashekar . R</option>
+                        <option value="sunanda.a@nitpy.ac.in">Dr. Sunanda Ambulker</option>
+                        <option value="hemachander.a@nitpy.ac.in">Dr. Hemachander . A</option>
+                    </select>
+                    @if($errors->has('warden'))
+                        <span class="text-danger">{{ $errors->first('warden') }}</span>
+                    @endif
+                </div>
+                <div class="form-group">
                     <label for="password" class="font">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter Password" required>
                     @if($errors->has('password'))
@@ -174,19 +197,6 @@
                 <div class="form-group button">
                     <input type="submit" id="submit" value="Sign Up">
                 </div>
-                <!-- @if ($errors->any())
-                    <div class="alertalert-danger ">
-                        <h3 class="font">Error..Please Try Again</h3>
-                        <div class="error"  >
-                            @foreach ($errors->all() as $error)
-                                <div class="mssg"  >
-                                    <img class="error_img" src="assets/images/Error.webp" alt="">
-                                    <p class="err_p"> {{ $error }} </p>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif -->
                 <div class="text-below-image">Have an account already? <a class="font" href="{{ route('StudentLogin') }}">Login</a></div>
             </form>
         </div>

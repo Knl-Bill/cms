@@ -64,14 +64,6 @@
         <div>
             <img src="storage/{{$stud->image}}" alt="email screenshot" style="width:400px;height:200px;">
         </div> 
-        <!-- <div class="buttons">
-          <div>
-              <button id="{{$stud->rollno}}" style="background-color:lime;"> Approve </button>
-          </div> 
-          <div>
-              <button id="{{$stud->rollno}}" href="#" style="background-color:red;"> Decline </button>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>

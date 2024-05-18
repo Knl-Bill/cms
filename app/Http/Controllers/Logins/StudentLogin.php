@@ -25,7 +25,7 @@ class StudentLogin extends Controller
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) 
         {
-            return redirect('login')->withInput()->withErrors($validator);
+            return redirect('StudentLogin')->withInput()->withErrors($validator);
         }
         else
         {
