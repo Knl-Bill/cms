@@ -31,16 +31,7 @@ class LeavereqController extends Controller
         $result->outime=$request->outime;
         $result->indate=$request->indate;
         $result->intime=$request->intime;
-        $result->noofdays=$request->noofdays;
-        // $name= $request->input('name');
-        // $phoneno= $request->input('phoneno');
-        // $placeofvisit= $request->input('placeofvisit');
-        // $purpose= $request->input('purpose');
-        // $outdate= Carbon::parse($request->input('outdate'))->format('Y-m-d');
-        // $outtime= Carbon::parse($request->input('outime'))->format('H:i:s');
-        // $indate= Carbon::parse($request->input('indate'))->format('Y-m-d');
-        // $intime= Carbon::parse($request->input('intime'))->format('H:i:s');
-        // $noofdays= $request->input('noofdays');        
+        $result->noofdays=$request->noofdays;        
         if ($request->hasFile('image')) 
         {
             $image = $request->file('image');

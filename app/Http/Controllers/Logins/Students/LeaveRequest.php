@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Logins\Students;
 
 use App\Http\Controllers\Controller;
+use App\Models\Leavereq;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
+use App\Http\Requests;
+use Hash;
+use Carbon\Carbon;
+use File;
 
 class LeaveRequest extends Controller
 {
@@ -18,47 +21,33 @@ class LeaveRequest extends Controller
     }
     public function InsertLeaveRequest(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'rollno' => 'required|string|max:255',
-            'name' => 'required|string|max:255',
-            'phoneno' => 'required|string|max:10',
-            'placeofvisit' => 'required|string|max:255',
-            'purpose' => 'required|string|max:255',
-            'outdate' => 'required|date',
-            'outime' => 'required',
-            'indate' => 'required|date',
-            'intime' => 'required',
-            'noofdays' => 'required|integer',
-            'image' => 'required|image|mimes:jpeg,png,jpg|max:5120'
-        ]);
-
-        // Handle validation failures
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        $user = Session::get('user');
+        $result=new Leavereq();
+        $result->rollno=$user->rollno;
+        $result->name=$user->name;
+        $result->phoneno=$user->phoneno;
+        $result->placeofvisit=$request->placeofvisit;
+        $result->purpose=$request->purpose;
+        $result->outdate=$request->outdate;
+        $result->outime=$request->outime;
+        $result->indate=$request->indate;
+        $result->intime=$request->intime;
+        $result->noofdays=$request->noofdays;        
+        if ($request->hasFile('image')) 
+        {
+            $image = $request->file('image');
+            $filename = $result->rollno . '_' . $result->outdate;  
+            $photoPath = $image->storeAs('leavereq_emails', $filename, 'public');
+        } 
+        else 
+        {
+            $photoPath = null;
         }
-
-        // Handle the file upload
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('images', 'public');
-        }
-
-        // Insert the data into the database
-        DB::table('leavereqs')->insert([
-            'rollno' => $request->input('rollno'),
-            'name' => $request->input('name'),
-            'phoneno' => $request->input('phoneno'),
-            'placeofvisit' => $request->input('placeofvisit'),
-            'purpose' => $request->input('purpose'),
-            'outdate' => $request->input('outdate'),
-            'outime' => $request->input('outime'),
-            'indate' => $request->input('indate'),
-            'intime' => $request->input('intime'),
-            'noofdays' => $request->input('noofdays'),
-            'image' => $imagePath
-        ]);
+        $result->image = $photoPath;
+        $result->save();
 
         // Redirect or return a response
-        return redirect()->back()->with('success', 'Leave request submitted successfully.');
+        return back()->with('success',"Leave Request submitted successfully.");
     }
     public function DisabledDetails()
     {
@@ -75,4 +64,14 @@ class LeaveRequest extends Controller
             return response()->json(['message' => 'Guest'], 401);
         }
     }
+
+    public function show_leave_det()
+    {
+        $user = Session::get('user');
+        $stmt="select * from leavereqs where rollno='". $user->rollno ."';"; 
+        $students = DB::select($stmt);
+        return view('Logins.StudentPages.LeaveReqHistory',['students'=>$students]);
+    }
+
+
 }

@@ -29,7 +29,7 @@
         
         document.getElementById('logout').addEventListener('click', function() {
         // Make an AJAX request to trigger the Logout function
-            fetch('/Logout').then(response => {
+            fetch('/SecurityLogout').then(response => {
                     if(response.ok) 
                     {
                         // If logout successful, redirect to home page

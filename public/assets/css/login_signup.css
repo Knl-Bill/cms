@@ -130,6 +130,12 @@ input[type="submit"]:hover {
     font-weight: bold;
     font-size: 13px;
 }
+.text-safe{
+    color: rgb(76, 220, 37);
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+}
 .disabled{
-    background-color: rgb(234, 234, 234);
+    background-color: rgb(224, 224, 224);
 }

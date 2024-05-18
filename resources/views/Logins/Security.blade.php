@@ -12,19 +12,25 @@
             <img src="assets/images/signup.jpeg" alt="Sign Up Image" class="image">
         </div>
         <div class="form-container">
-            <h1>LOGIN</h1>
+            <h1 class="font">LOGIN</h1>
             <form method="post" action="SecurityLoginVerify" id="signup">
                 @csrf
                 <div class="form-group">
-                    <label for="phoneno">Phone Number</label>
+                    <label for="phoneno" class="font">Phone Number</label>
                     <input type="text" name="phoneno" id="rollno" placeholder="Phone Number" required>
+                    @if($errors->has('phoneno'))
+                        <span class="text-danger">{{ $errors->first('phoneno') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password" class="font">Password</label>
                     <input type="password" id="password" name="password" placeholder="Enter Password" required>
+                    @if($errors->has('password'))
+                        <span class="text-danger">{{ $errors->first('password') }}</span>
+                    @endif
                 </div>
                 <div class="form-group">
-                    <a href="">Forgot Password?</a>
+                    <a href="" class="font" style="font-size:14px;">Forgot Password?</a>
                 </div>
                 <div class="form-group button">
                     <input type="submit" id="submit" value="Login">

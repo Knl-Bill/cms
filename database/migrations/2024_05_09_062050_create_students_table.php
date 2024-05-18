@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('gender');
             $table->string('hostelname');
             $table->string('roomno');
+            $table->string('faculty_advisor');
+            $table->string('warden'); 
             $table->string('password');
             $table->timestamps();
         });
