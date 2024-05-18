@@ -18,11 +18,16 @@
     <div class="Academics">
         <button id="Academics">View Academic Details</button>
     </div>
+    <div class="profile">
+        <button id="profile">Profile</button>
+    </div>
     <br><br>
     <div class="logout">
         <button id="logout">Logout</button>
     </div>
     <script>
+
+        // Fetch the username from the Login Session
         fetch('/StudentSession').then(response => response.text()).then(data => {
             document.querySelector('.user').innerHTML = 'Welcome, ' + data;
         });
@@ -45,8 +50,14 @@
             });
         });
 
+        // Event Listener for Leave Request Button
         document.getElementById('Leave').addEventListener('click', function() {
-            window.location.href = '{{route('LeaveRequestPage')}}'
+            window.location.href = '{{route('LeaveRequestPage')}}';
+        });
+
+        // Event Listener for Profile Button
+        document.getElementById('profile').addEventListener('click', function() {
+            window.location.href = '{{route('StudentProfile')}}';
         });
     </script>
 </body>

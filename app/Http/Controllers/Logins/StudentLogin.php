@@ -16,6 +16,10 @@ class StudentLogin extends Controller
     {
         return view('Logins.StudentPages.StudentDashboard');
     }
+    public function StudentProfile()
+    {
+        return view('profile.stud_update');
+    }
     public function StudentLoginVerify(Request $request)
     {
         $rules = [

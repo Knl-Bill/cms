@@ -20,21 +20,22 @@
                 @csrf
                 <div class="form-group">
                     <label for="phoneno" class="font">Roll Number</label>
-                    <input type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif
                 </div>
                 <div class="form-group">
                     <label for="phoneno" class="font">Current Password</label>
-                    <input type="text" name="curr_pass" id="rollno" placeholder="Enter Current Password" required>
+                    <input type="text" name="curr_pass" id="currpass" placeholder="Enter Current Password" required>
                     @if($errors->has('curr_pass'))
                         <span class="text-danger">{{ $errors->first('curr_pass') }}</span>
                     @endif
                 </div>
                 <div class="form-group">
                     <label for="phoneno" class="font">New Password</label>
-                    <input type="password" name="new_pass" id="rollno" placeholder="Enter New Password" required>
+                    <input type="password" name="new_pass" id="newpass" placeholder="Enter New Password" required>
                     @if($errors->has('new_pass'))
                         <span class="text-danger">{{ $errors->first('new_pass') }}</span>
                     @endif
@@ -58,14 +59,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="phoneno" class="font">Roll Number</label>
-                    <input type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif
                 </div>
                 <div class="form-group">
                     <label for="phoneno" class="font">New Room Number</label>
-                    <input type="text" name="new_roomno" id="rollno" placeholder="Enter New Room Number" required>
+                    <input type="text" name="new_roomno" id="roomno" placeholder="Enter New Room Number" required>
                     @if($errors->has('new_roomno'))
                         <span class="text-danger">{{ $errors->first('new_roomno') }}</span>
                     @endif
@@ -81,7 +83,8 @@
                 @csrf
                 <div class="form-group">
                     <label for="phoneno" class="font">Roll Number</label>
-                    <input type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif
@@ -109,14 +112,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="phoneno" class="font">Roll Number</label>
-                    <input type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif
                 </div>
                 <div class="form-group">
                     <label for="phoneno" class="font">New Phone Number</label>
-                    <input type="text" name="new_phoneno" id="rollno" placeholder="Enter New Phone Number" required>
+                    <input type="text" name="new_phoneno" id="phoneno" placeholder="Enter New Phone Number" required>
                     @if($errors->has('new_phoneno'))
                         <span class="text-danger">{{ $errors->first('new_phoneno') }}</span>
                     @endif
@@ -132,14 +136,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="phoneno" class="font">Roll Number</label>
-                    <input type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif
                 </div>
                 <div class="form-group">
                     <label for="phoneno" class="font">New E-Mail Address</label>
-                    <input type="text" name="new_email" id="rollno" placeholder="Enter New E-Mail Address" required>
+                    <input type="text" name="new_email" id="email" placeholder="Enter New E-Mail Address" required>
                     @if($errors->has('new_email'))
                         <span class="text-danger">{{ $errors->first('new_email') }}</span>
                     @endif
@@ -153,5 +158,15 @@
 
         </div>
     </div>
+
+    <!-- End of Divs, start of the JS Script Section-->
+    <script>
+        fetch('DisabledDetails').then(response => response.json()).then(data => {
+            document.querySelectorAll('.disabled').forEach(element => {
+                element.value = data.rollno;
+                element.placeholder = data.placeholder;
+            });
+        });
+    </script>
 </body>
 </html>

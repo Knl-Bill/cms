@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Session;
 class SecurityLogin extends Controller
 {
     //
+    public function SecurityDashboard()
+    {
+        return view('Logins.SecurityPages.Landing');
+    }
     public function SecurityLoginVerify(Request $request)
     {
         $request->validate([
@@ -53,5 +57,10 @@ class SecurityLogin extends Controller
             return $user->name;
         else   
             return "Guest";
+    }
+    public function SecurityLogout()
+    {
+        Session::forget('user');
+        return redirect('/');
     }
 }

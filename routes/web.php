@@ -42,7 +42,7 @@ Route::get('/StudentSignUp',[LoginController::class,'StudentSignUp'])->name('Stu
 Route::get('SecurityDashboard',[SecurityLogin::class,'SecurityDashboard'])->name('SecurityDashboard');
 Route::post('/SecurityLoginVerify',[SecurityLogin::class,'SecurityLoginVerify'])->name('SecurityLoginVerify');
 Route::get('/SecuritySession',[SecurityLogin::class,'SecuritySession'])->name('SecuritySession');
-Route::get('/Logout',[SecurityLogin::class,'Logout'])->name('Logout');
+Route::get('/SecurityLogout',[SecurityLogin::class,'SecurityLogout'])->name('SecurityLogout');
 
 // Security Controller
 Route::get('/OutingText',[SecurityController::class,'OutingText'])->name('OutingText');
@@ -53,6 +53,8 @@ Route::get('/StudentDashboard',[StudentLogin::class,'StudentDashboard'])->name('
 Route::post('StudentLoginVerify',[StudentLogin::class,'StudentLoginVerify'])->name('StudentLoginVerify');
 Route::get('StudentSession',[StudentLogin::class,'StudentSession'])->name('StudentSession');
 Route::get('StudentLogout',[StudentLogin::class,'StudentLogout'])->name('StudentLogout');
+Route::get('StudentProfile',[StudentLogin::class,'StudentProfile'])->name('StudentProfile');
+
 
 // Student Controllers
 Route::get('/LeaveRequestPage',[LeaveRequest::class,'LeaveRequestPage'])->name('LeaveRequestPage');
