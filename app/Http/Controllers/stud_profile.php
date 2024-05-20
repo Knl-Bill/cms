@@ -16,7 +16,6 @@ class stud_profile extends Controller
     {
         return view('profile.stud_update');
     }
- 
     public function changePasswordSave(Request $request)
     {
         
@@ -27,7 +26,8 @@ class stud_profile extends Controller
         ]);
  
         // The passwords matches
-        $rollno = $request->input('rollno');
+        $user = Session::get('user');
+        $rollno = $user->rollno;
         $curr_pass = $request->input('curr_pass');
         
         if(DB::table('students')->where('rollno',$rollno)->exists())
@@ -55,7 +55,8 @@ class stud_profile extends Controller
         $request->validate([
             'new_roomno' => 'required',
         ]);
-        $rollno = $request->input('rollno');
+        $user = Session::get('user');
+        $rollno = $user->rollno;
         $curr_pass = $request->input('curr_pass');
         if(DB::table('students')->where('rollno',$rollno)->exists())
         {          
@@ -75,7 +76,8 @@ class stud_profile extends Controller
         $request->validate([
             'new_hostelname' => 'required',
         ]);
-        $rollno = $request->input('rollno');
+        $user = Session::get('user');
+        $rollno = $user->rollno;
         $curr_pass = $request->input('new_hostelname');
         if(DB::table('students')->where('rollno',$rollno)->exists())
         {          
@@ -95,7 +97,8 @@ class stud_profile extends Controller
         $request->validate([
             'new_phoneno' => 'required|min:10|max:10',
         ]);
-        $rollno = $request->input('rollno');
+        $user = Session::get('user');
+        $rollno = $user->rollno;
         $new_phoneno = $request->input('new_phoneno');
         if(DB::table('students')->where('rollno',$rollno)->exists() && !(DB::table('students')->where('phoneno',$new_phoneno)->exists()))
         {          
@@ -115,7 +118,8 @@ class stud_profile extends Controller
         $request->validate([
             'new_email' => 'required|email',
         ]);
-        $rollno = $request->input('rollno');
+        $user = Session::get('user');
+        $rollno = $user->rollno;
         $new_email = $request->input('new_email');
         if(DB::table('students')->where('rollno',$rollno)->exists() && !(DB::table('students')->where('email',$new_email)->exists()))
         {          

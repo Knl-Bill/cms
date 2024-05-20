@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@264&display=swap');
+
+.font {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0;
+}
+.container {
+    display: block;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+} 
+.font1 {
+    font-family: "Inter", sans-serif;
+    color: #334ee5;
+    text-align: left;
+    padding-top: 25px;
+}
+.heading-update{
+    font-family: "Inter", sans-serif;
+    color: #334ee5;
+    text-align: center;
+    background-color: #9ec1f8;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+.text-below-image {
+    font-size: 16px;
+    color: #333;
+    margin-top: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+    "slnt" 0;
+} 
+.text-below-image a {
+    color: #2b6fdb;
+    text-decoration: none;
+    font-weight: 500;
+    
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: auto;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+input[type="text"], input[type="password"], select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+}
+.button {
+    text-align: center;
+}
+input[type="submit"] {
+    background-color: #334ee5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+input[type="submit"]:hover {
+    background-color: #1d3adb;
+}
+.alertalert-danger{
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: none;
+    background: #f7f7f7;
+    color: #000000;
+    padding: 20px;
+}
+.error{
+    
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    
+}
+.mssg{
+    border: 1px solid #bf1515;
+    border-radius: 4px;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+.err_p{
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 13px;
+}
+.error_img{
+    height:20px; 
+    width:20px;
+}
+.text-danger{
+    color: red;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+}
+.text-safe{
+    color: rgb(76, 220, 37);
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+}
+.disabled{
+    background-color: rgb(224, 224, 224);
+}

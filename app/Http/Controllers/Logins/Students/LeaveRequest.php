@@ -57,7 +57,7 @@ class LeaveRequest extends Controller
             return response()->json([
                 'rollno' => $user->rollno,
                 'name' => $user->name,
-                'phoneno' => $user->phoneno
+                'phoneno' => $user->phoneno,
             ]);
         }
         else{

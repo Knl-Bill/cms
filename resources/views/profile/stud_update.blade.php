@@ -3,25 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="assets/css/login_signup.css">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="assets/css/profile.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">     
+    <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <div class="image-container">
-            <img src="assets/images/signup.jpeg" alt="Sign Up Image" class="image">
+        <div class="details">
+            <h1 class="heading-update">Your Details</h1>
+            @foreach($students as $stud)
+            <table class="table table-striped-columns table-bordered">
+                <tbody>
+                    <tr>
+                        <td>Roll Number</td>
+                        <td>{{$stud->rollno}}</td>
+                    </tr>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{$stud->name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td>{{$stud->phoneno}}</td>
+                    </tr>
+                    <tr>
+                        <td>E-Mail Address</td>
+                        <td>{{$stud->email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Course</td>
+                        <td>{{$stud->course}}</td>
+                    </tr>
+                    <tr>
+                        <td>Batch</td>
+                        <td>{{$stud->batch}}</td>
+                    </tr>
+                    <tr>
+                        <td>Department </td>
+                        <td>{{$stud->dept}}</td>
+                    </tr>
+                    <tr>
+                        <td>Hostel Name</td>
+                        <td>{{$stud->hostelname}}</td>
+                    </tr>
+                    <tr>
+                        <td>Room Number</td>
+                        <td>{{$stud->roomno}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            @endforeach
         </div>
         <div class="form-container">
-            <h1 class="font">Update Your Password</h1>
             @if(Session::get('success'))
                 <span class="text-safe">{{ Session::get('success') }}</span>
             @endif
+            <div>
+                <h1 class="heading-update">Update Your Profile</h1>
+            </div>
+            <h3 class="font1">Password</h3>
+           
             <form method="post" action="change-password" id="signup">
                 @csrf
                 <div class="form-group">
-                    <label for="phoneno" class="font">Roll Number</label>
+                    <!-- <label for="phoneno" class="font">Roll Number</label>
                     <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
-                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required> -->
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif
@@ -54,13 +103,13 @@
 
 
             <!-- Update Room Number -->
-            <h1 class="font">Update Your Room Number</h1>
+            <h3 class="font1">Room Number</h3>
             <form method="post" action="change-roomno" id="signup">
                 @csrf
                 <div class="form-group">
-                    <label for="phoneno" class="font">Roll Number</label>
+                    <!-- <label for="phoneno" class="font">Roll Number</label>
                     <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
-                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required> -->
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif
@@ -78,13 +127,13 @@
             </form>
 
             <!-- Update Hostel -->
-            <h1 class="font">Update Your Hostel</h1>
+            <h3 class="font1">Hostel</h3>
             <form method="post" action="change-hostel" id="signup">
                 @csrf
                 <div class="form-group">
-                    <label for="phoneno" class="font">Roll Number</label>
+                    <!-- <label for="phoneno" class="font">Roll Number</label>
                     <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
-                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required> -->
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif
@@ -107,13 +156,13 @@
             </form>
 
             <!-- Update Phone Number -->
-            <h1 class="font">Update Your Phone Number</h1>
+            <h3 class="font1">Phone Number</h3>
             <form method="post" action="change-phoneno" id="signup">
                 @csrf
                 <div class="form-group">
-                    <label for="phoneno" class="font">Roll Number</label>
+                    <!-- <label for="phoneno" class="font">Roll Number</label>
                     <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
-                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required> -->
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif
@@ -131,13 +180,13 @@
             </form>
 
             <!-- Update Email -->
-            <h1 class="font">Update Your E-Mail Address</h1>
+            <h3 class="font1">E-Mail Address</h3>
             <form method="post" action="change-email" id="signup">
                 @csrf
                 <div class="form-group">
-                    <label for="phoneno" class="font">Roll Number</label>
+                    <!-- <label for="phoneno" class="font">Roll Number</label>
                     <input class="disabled" disabled type="text" name="rollno" id="rollno" placeholder="Enter Your Roll Number" required>
-                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required>
+                    <input class="disabled" hidden type="text" name="rollno" id="rollno" placeholder="rollno" required> -->
                     @if($errors->has('rollno'))
                         <span class="text-danger">{{ $errors->first('rollno') }}</span>
                     @endif

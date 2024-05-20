@@ -18,7 +18,10 @@ class StudentLogin extends Controller
     }
     public function StudentProfile()
     {
-        return view('profile.stud_update');
+        $user = Session::get('user');
+        $stmt="select * from students where rollno='". $user->rollno ."';"; 
+        $students = DB::select($stmt);
+        return view('profile.stud_update',['students'=>$students]);
     }
     public function StudentLoginVerify(Request $request)
     {
