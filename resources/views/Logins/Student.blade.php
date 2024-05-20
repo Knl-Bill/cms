@@ -35,7 +35,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <a href="{{ route('forget-password') }}" class="font" style="font-size:14px;">Forgot Password?</a>
+                    <a href="{{ route('forget-password') }}" class="font" style="font-size:14px;text-decoration:none;">Forgot Password?</a>
                 </div>
                 <div class="form-group button">
                     <input type="submit" id="submit" value="Login">
