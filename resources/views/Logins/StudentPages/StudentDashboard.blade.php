@@ -78,6 +78,11 @@
         document.getElementById('profile').addEventListener('click', function() {
             window.location.href = '{{route('StudentProfile')}}';
         });
+
+        // Event Listener for Outing History Button
+        document.getElementById('Outing').addEventListener('click', function() {
+            window.location.href = '{{route('GetOutings')}}';
+        });
     </script>
 </body>
 </html>
