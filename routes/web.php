@@ -63,6 +63,10 @@ Route::get('/GetOutings',[OutingHistory::class,'GetOutings'])->name('GetOutings'
 
 // Security Page's Outing Controller
 Route::post('/InsertOuting',[OutingController::class,'InsertOuting'])->name('InsertOuting');
+Route::get('/OutingStatus',[OutingController::class,'OutingStatus'])->name('OutingStatus');
+Route::get('/UnclosedOuting',[OutingController::class,'UnclosedOuting'])->name('UnclosedOuting');
+Route::get('/BoysOuting',[OutingController::class,'BoysOuting'])->name('BoysOuting');
+Route::get('/GirlsOuting',[OutingController::class,'GirlsOuting'])->name('GirlsOuting');
 
 
 // Student Controllers

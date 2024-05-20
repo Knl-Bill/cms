@@ -27,6 +27,37 @@
             <button type="submit">Submit</button>
         </form>
     </div>
+    <br><br>
+    <div class="ButtonContainer">
+        <div class="OutingStatus">
+            <button id="OutingStatus">Outing Status</button>
+        </div>
+        <div class="Unclosed Outings">
+            <button id="UnclosedOuting">Unclosed Outings</button>
+        </div>
+        <div class="BoysOuting">
+            <button id="BoysOuting">Boys Outing</button>
+        </div>
+        <div class="GirlsOuting">
+            <button id="GirlsOuting">Girls Outing</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById('OutingStatus').addEventListener('click', function() {
+            window.location.href = '{{route('OutingStatus')}}';
+        });
 
+        document.getElementById('UnclosedOuting').addEventListener('click', function() {
+            window.location.href = '{{route('UnclosedOuting')}}';
+        });
+
+        document.getElementById('BoysOuting').addEventListener('click', function() {
+            window.location.href = '{{route('BoysOuting')}}';
+        });
+
+        document.getElementById('GirlsOuting').addEventListener('click', function() {
+            window.location.href = '{{route('GirlsOuting')}}';
+        });
+    </script>
 </body>
 </html>
