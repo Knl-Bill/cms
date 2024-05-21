@@ -12,6 +12,7 @@ use App\Http\Controllers\stud_profile;
 use App\Http\Controllers\Logins\StudentLogin;
 use App\Http\Controllers\Logins\Students\OutingHistory;
 use App\Http\Controllers\Logins\Security\OutingController;
+use App\Http\Controllers\Logins\AdminLogin;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,12 @@ Route::get('/DisabledDetails',[LeaveRequest::class,'DisabledDetails'])->name('Di
 Route::get('/leavereqshist', [LeaveRequest::class,'show_leave_det'])->name('leavereqshist');
 Route::post('/signup', [StudentController::class, 'insert'])->name('signup');
 Route::get('/main', [StudentController::class,'signup'])->name('signup');
+
+// Admin Login Controller
+Route::get('/AdminDashboard',[AdminLogin::class,'AdminDashboard'])->name('AdminDashboard');
+Route::post('/AdminLoginVerify',[AdminLogin::class,'AdminLoginVerify'])->name('AdminLoginVerify');
+Route::get('/AdminSession',[AdminLogin::class,'AdminSession'])->name('AdminSession');
+Route::get('/AdminLogout',[AdminLogin::class,'AdminLogout'])->name('AdminLogout');
 
 // Route::post('/leavereqs', [LeavereqController::class, 'insert'])->name('leavereqs');
 // Route::get('/login', [StudentController::class,'login'])->name('login');
