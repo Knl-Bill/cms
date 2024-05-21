@@ -98,7 +98,7 @@ class OutingController extends Controller
         {
             $gender = "FEMALE";
             $OutingHistory = DB::table('outing_table')->where('gender',$gender)->orderBy('outtime','desc')->get(); 
-            $name = "Boys Outing";
+            $name = "Girls Outing";
             return view('Logins.SecurityPages.Outing.OutingHistory',['OutingHistory' => $OutingHistory, 'Name' => $name]);
         }
         else{

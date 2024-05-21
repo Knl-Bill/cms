@@ -13,11 +13,11 @@
         </div>
         <div class="form-container">
             <h1>LOGIN</h1>
-            <form method="post" action="/signup" id="signup">
+            <form method="post" action="/AdminLoginVerify" id="signup">
                 @csrf
                 <div class="form-group">
-                    <label for="rollno">Roll Number</label>
-                    <input type="text" name="rollno" id="rollno" placeholder="Roll Number" required>
+                    <label for="email">E-Mail</label>
+                    <input type="text" name="email" id="email" placeholder="E-Mail" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
