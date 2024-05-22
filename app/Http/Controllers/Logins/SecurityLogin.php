@@ -31,7 +31,7 @@ class SecurityLogin extends Controller
         if($user) 
         {
             // If the user exists, check if the password matches
-            if($password === $user->password) 
+            if(HASH::check($password,$user->password)) 
             {
                 // Password matches, redirect to dashboard
                 Session::put('user',$user);

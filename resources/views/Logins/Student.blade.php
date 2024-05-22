@@ -17,7 +17,7 @@
                     {{ Session::get('success') }}
                 </span>
             @endif
-            <h1 class="font">LOGIN</h1>
+            <h1 class="font">STUDENT LOGIN</h1>
             <form method="post" action="/StudentLoginVerify" id="signup">
                 @csrf
                 <div class="form-group">
