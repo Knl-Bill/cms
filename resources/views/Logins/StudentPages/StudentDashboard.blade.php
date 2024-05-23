@@ -34,6 +34,9 @@
 
         </div>
         <h1>DASHBOARD</h1>
+        <div class="status">
+            <a href="{{ route('leavereqshist') }}">Leave Requests History</a>
+        </div>
         <div class="Leave">
             <button id="Leave">Leave Requests</button>
         </div>

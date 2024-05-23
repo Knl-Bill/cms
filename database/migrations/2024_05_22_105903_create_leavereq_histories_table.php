@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('leavereqs', function (Blueprint $table) {
+        Schema::create('leavereq_histories', function (Blueprint $table) {
             $table->id();
-            $table->string('rollno')->unique();
+            $table->string('rollno');
             $table->string('name');
-            $table->string('phoneno')->unique();
+            $table->string('phoneno');
             $table->string('placeofvisit');
             $table->string('purpose');
             $table->date('outdate');
@@ -25,11 +25,11 @@ return new class extends Migration
             $table->date('indate');
             $table->time('intime');
             $table->string('noofdays');
-            $table->string('image');
-            $table->string('faculty_email');
-            $table->string('warden_email');
             $table->integer('faculty_adv')->default(0);
             $table->integer('warden')->default(0);
+            $table->string('image');
+            $table->string('barcode');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -41,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leavereqs');
+        Schema::dropIfExists('leavereq_histories');
     }
 };

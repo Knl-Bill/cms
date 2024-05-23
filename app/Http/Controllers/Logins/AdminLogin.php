@@ -28,7 +28,7 @@ class AdminLogin extends Controller
         $password = $request->input('password');
 
         // Retrieve the user by their phone number
-        $user = DB::table('admin_login')->where('email', $email)->first();
+        $user = DB::table('admin_logins')->where('email', $email)->first();
         if($user) 
         {
             // If the user exists, check if the password matches

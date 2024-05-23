@@ -29,15 +29,15 @@ class ForgotPasswordAdminController extends Controller
       public function submitForgetPasswordForm(Request $request)
       {
           $request->validate([
-              'email' => 'required|email|exists:security_login',
+              'email' => 'required|email|exists:admin_logins',
           ]);
   
           $token = Str::random(64);
-          if(DB::table('password_reset_admin')->where('email',$request->email)->exists())
+          if(DB::table('password_reset_admins')->where('email',$request->email)->exists())
           {
             return back()->with('message', 'We have already e-mailed your password reset link! Please check your email');
           }
-          DB::table('password_reset_admin')->insert([
+          DB::table('password_reset_admins')->insert([
               'email' => $request->email, 
               'token' => $token, 
               'created_at' => Carbon::now()
@@ -68,12 +68,12 @@ class ForgotPasswordAdminController extends Controller
       public function submitResetPasswordForm(Request $request)
       {
           $request->validate([
-              'email' => 'required|email|exists:security_login',
+              'email' => 'required|email|exists:admin_logins',
               'password' => 'required|string|min:8|confirmed',
               'password_confirmation' => 'required'
           ]);
   
-          $updatePassword = DB::table('password_reset_admin')
+          $updatePassword = DB::table('password_reset_admins')
                               ->where([
                                 'email' => $request->email, 
                                 'token' => $request->token
@@ -84,10 +84,10 @@ class ForgotPasswordAdminController extends Controller
               return back()->withInput()->with('error', 'Invalid token!');
           }
   
-          $user = DB::table('admin_login')->where('email', $request->email)
+          $user = DB::table('admin_logins')->where('email', $request->email)
                       ->update(['password' => Hash::make($request->password)]);
  
-          DB::table('password_reset_admin')->where(['email'=> $request->email])->delete();
+          DB::table('password_reset_admins')->where(['email'=> $request->email])->delete();
   
           return redirect()->route('AdminLogin')->with('success',"Password Changed Successfully");
       }

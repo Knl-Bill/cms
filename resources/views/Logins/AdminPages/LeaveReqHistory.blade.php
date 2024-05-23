@@ -16,17 +16,13 @@
     @foreach($students as $stud)
   <div class="accordion-item" >
     <h2 class="accordion-header">
-      @if(($stud->warden==0 && $stud->faculty_adv==1) || ($stud->warden==0 && $stud->faculty_adv==0) )
-        <button style="background-color:yellow;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}"  aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
-          OUTDATE --  {{date('d/m/Y',strtotime($stud->outdate))}}
-        </button>
-      @elseif($stud->warden==1)
+      @if($stud->status=="Approved")
         <button style="background-color:limegreen;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}"  aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
-        OUTDATE --  {{date('d/m/Y',strtotime($stud->outdate))}}
+        Roll Number --  {{$stud->rollno}}
         </button>
-      @elseif($stud->faculty_adv==2 || $stud->warden==2)
+      @elseif($stud->status=="Declined")
         <button style="background-color:red;"class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}"  aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
-        OUTDATE --  {{date('d/m/Y',strtotime($stud->outdate))}}
+        Roll Number --  {{$stud->rollno}}
         </button>
       @endif
     </h2>
@@ -76,28 +72,13 @@
           </tr>
           <tr>
             <td>Status </td>
-            @if($stud->warden==0 && $stud->faculty_adv==0)
-              <td>Not Yet Approved</td>
-            @elseif($stud->warden==0 && $stud->faculty_adv==1)
-              <td>Approved by Faculty Advisor only</td>
-            @elseif($stud->warden==1)
-              <td>Approved</td>
-            @elseif($stud->faculty_adv==2 || $stud->warden==2)
-              <td>Declined</td>
-            @endif
-          </tr>
+            <td>{{$stud->status}}</td>
+          </tr>  
         </tbody>
       </table>
       @if ($stud->image!=NULL)
         <div>
             <img src="storage/{{$stud->image}}" alt="email screenshot" style="width:400px;height:100px;">
-        </div> 
-      @endif
-
-      <h5>BARCODE</h5>
-      @if ($stud->barcode!=NULL)
-        <div>
-            <img src="storage/{{$stud->barcode}}" alt="barcode" style="width:400px;height:100px;">
         </div> 
       @endif
       </div>

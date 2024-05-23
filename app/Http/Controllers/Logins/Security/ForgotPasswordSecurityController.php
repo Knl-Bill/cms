@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Logins\Security;
 use App\Http\Requests;
+
 use App\Models\password_reset_security;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class ForgotPasswordSecurityController extends Controller
       public function submitForgetPasswordForm(Request $request)
       {
           $request->validate([
-              'email' => 'required|email|exists:security_login',
+              'email' => 'required|email|exists:security_logins',
           ]);
   
           $token = Str::random(64);
@@ -68,7 +69,7 @@ class ForgotPasswordSecurityController extends Controller
       public function submitResetPasswordForm(Request $request)
       {
           $request->validate([
-              'email' => 'required|email|exists:security_login',
+              'email' => 'required|email|exists:security_logins',
               'password' => 'required|string|min:8|confirmed',
               'password_confirmation' => 'required'
           ]);
@@ -84,7 +85,7 @@ class ForgotPasswordSecurityController extends Controller
               return back()->withInput()->with('error', 'Invalid token!');
           }
   
-          $user = DB::table('security_login')->where('email', $request->email)
+          $user = DB::table('security_logins')->where('email', $request->email)
                       ->update(['password' => Hash::make($request->password)]);
  
           DB::table('password_reset_securities')->where(['email'=> $request->email])->delete();

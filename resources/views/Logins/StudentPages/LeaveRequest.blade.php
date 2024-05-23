@@ -18,7 +18,7 @@
     <h1>Leave Request</h1>
     <br><br>
     <div class="status">
-        <a href="{{ route('leavereqshist') }}">See Your Leave Status</a>
+        <a href="{{ route('pendingleavereqshist') }}">See Your Leave Status</a>
     </div>
     <br><br>
     @if (Session::get('success'))
@@ -59,6 +59,9 @@
         <input type="text" name="noofdays" placeholder="Number of Days" required>
         <br><br>
         <label for="image">Screenshot of E-Mail from Parents: - </label>
+        @if($errors->has('image'))
+            <span class="text-danger">{{ $errors->first('image') }}</span>
+        @endif
         <input type="text" placeholder="E-Mail Screenshot" accept="image/png,image/jpeg"  oninput="this.className = ''" name="image" onfocus="(this.type='file')">
         <br><br>
         <input type="Submit" id="submit" value="Submit" style="margin-left:55px">

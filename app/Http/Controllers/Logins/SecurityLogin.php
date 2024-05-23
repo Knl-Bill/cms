@@ -27,7 +27,7 @@ class SecurityLogin extends Controller
         $password = $request->input('password');
 
         // Retrieve the user by their phone number
-        $user = DB::table('security_login')->where('phoneno', $phoneNumber)->first();
+        $user = DB::table('security_logins')->where('phoneno', $phoneNumber)->first();
         if($user) 
         {
             // If the user exists, check if the password matches

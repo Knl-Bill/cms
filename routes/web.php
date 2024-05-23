@@ -2,6 +2,7 @@
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LeavereqController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\Logins\Admin\AdminController;
 use App\Http\Controllers\Logins\Admin\ForgotPasswordAdminController;
 use App\Http\Controllers\Logins\Security\ForgotPasswordSecurityController;
 use App\Http\Controllers\ProfileController;
@@ -61,6 +62,12 @@ Route::post('/SecurityLoginVerify',[SecurityLogin::class,'SecurityLoginVerify'])
 Route::get('/SecuritySession',[SecurityLogin::class,'SecuritySession'])->name('SecuritySession');
 Route::get('/SecurityLogout',[SecurityLogin::class,'SecurityLogout'])->name('SecurityLogout');
 
+//Admin Controller
+Route::get('/leavereqshist_admin', [AdminController::class,'show_leave_det'])->name('leavereqshist_admin');
+Route::get('/LeaveRequests',[AdminController::class,'LeaveRequests'])->name('LeaveRequests');
+Route::post('/LeaveRequestWarden/{rollno}',[AdminController::class,'warden_approval']);
+Route::post('/LeaveRequestFaculty/{rollno}',[AdminController::class,'faculty_approval']);
+
 // Security Controller
 Route::get('/OutingText',[SecurityController::class,'OutingText'])->name('OutingText');
 Route::get('/LeaveText',[SecurityController::class,'LeaveText'])->name('LeaveText');
@@ -89,6 +96,7 @@ Route::get('/LeaveRequestPage',[LeaveRequest::class,'LeaveRequestPage'])->name('
 Route::post('/InsertLeaveRequest',[LeaveRequest::class,'InsertLeaveRequest'])->name('InsertLeaveRequest');
 Route::get('/DisabledDetails',[LeaveRequest::class,'DisabledDetails'])->name('DisabledDetails');
 Route::get('/leavereqshist', [LeaveRequest::class,'show_leave_det'])->name('leavereqshist');
+Route::get('/pendingleavereqshist', [LeaveRequest::class,'show_pending_leave_det'])->name('pendingleavereqshist');
 Route::post('/signup', [StudentController::class, 'insert'])->name('signup');
 Route::get('/main', [StudentController::class,'signup'])->name('signup');
 
