@@ -14,7 +14,7 @@ class OutingHistory extends Controller
     {
         $student = Session::get('user');
         $rollno = $student->rollno;
-        $OutingHistory = DB::table('outing_table')->where('rollno',$rollno)->orderBy('outtime','desc')->get();
+        $OutingHistory = DB::table('outing__table')->where('rollno',$rollno)->orderBy('outtime','desc')->get();
         return view('Logins.StudentPages.OutingHistory',['OutingHistory' => $OutingHistory]);
     }
 }

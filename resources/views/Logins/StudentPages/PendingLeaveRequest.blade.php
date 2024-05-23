@@ -10,19 +10,37 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1 class="heading">Leave Requests</h1>
+<h1 class="heading">Pending Leave Requests</h1>
 <div class="accordion" id="accordionExample">
-  @foreach ($students as $stud)
+    @foreach($students as $stud)
   <div class="accordion-item" >
     <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}"  aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
-        {{$stud->rollno}}
-      </button>
+      @if(($stud->warden==0 && $stud->faculty_adv==1))
+        <button style="background-color:yellow;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}"  aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
+          OUTDATE --  {{date('d/m/Y',strtotime($stud->outdate))}}
+        </button>
+      @elseif(($stud->warden==0 && $stud->faculty_adv==0) )
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}"  aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
+          OUTDATE --  {{date('d/m/Y',strtotime($stud->outdate))}}
+        </button>
+      @elseif($stud->warden==1)
+        <button style="background-color:limegreen;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}"  aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
+        OUTDATE --  {{date('d/m/Y',strtotime($stud->outdate))}}
+        </button>
+      @elseif($stud->faculty_adv==2 || $stud->warden==2)
+        <button style="background-color:red;"class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}"  aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
+        OUTDATE --  {{date('d/m/Y',strtotime($stud->outdate))}}
+        </button>
+      @endif
     </h2>
-    <div id="collapse{{$loop->iteration}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+    <div id="collapse{{ $loop->iteration }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         <table class="table table-striped-columns table-bordered">
         <tbody>
+        <tr>
+            <td>Roll Number</td>
+            <td>{{$stud->rollno}}</td>
+          </tr>
           <tr>
             <td>Name</td>
             <td>{{$stud->name}}</td>
@@ -59,19 +77,25 @@
             <td>No. Of Days </td>
             <td>{{$stud->noofdays}}</td>
           </tr>
+          <tr>
+            <td>Status </td>
+            @if($stud->warden==0 && $stud->faculty_adv==0)
+              <td>Not Yet Approved</td>
+            @elseif($stud->warden==0 && $stud->faculty_adv==1)
+              <td>Approved by Faculty Advisor only</td>
+            @elseif($stud->warden==1)
+              <td>Approved</td>
+            @elseif($stud->faculty_adv==2 || $stud->warden==2)
+              <td>Declined</td>
+            @endif
+          </tr>
         </tbody>
       </table>
+      @if ($stud->image!=NULL)
         <div>
             <img src="storage/{{$stud->image}}" alt="email screenshot" style="width:400px;height:100px;">
         </div> 
-        <div class="buttons">
-          <div>
-              <button id="{{$stud->rollno}}" style="background-color:lime;"> Approve </button>
-          </div> 
-          <div>
-              <button id="{{$stud->rollno}}" href="#" style="background-color:red;"> Decline </button>
-          </div>
-        </div>
+      @endif
       </div>
     </div>
   </div>

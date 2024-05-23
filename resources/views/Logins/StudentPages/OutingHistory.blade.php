@@ -17,16 +17,16 @@
             <thead>
                 <tr>
                     <th>Roll No</th>
-                    <th>Out Time</th>
-                    <th>In Time</th>
+                    <th>Out Date and Time</th>
+                    <th>In Date and Time</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($OutingHistory as $outing)
                 <tr>
                     <td>{{$outing->rollno}}</td>
-                    <td>{{$outing->outtime}}</td>
-                    <td>{{$outing->intime}}</td>
+                    <td>{{date('d/m/Y h:i a',strtotime($outing->outtime))}}</td>
+                    <td>{{date('d/m/Y h:i a',strtotime($outing->intime))}}</td>
                 </tr>
                 @endforeach
             </tbody>

@@ -2,6 +2,9 @@
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LeavereqController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\Logins\Admin\AdminController;
+use App\Http\Controllers\Logins\Admin\ForgotPasswordAdminController;
+use App\Http\Controllers\Logins\Security\ForgotPasswordSecurityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Logins\LoginController;
 use App\Http\Controllers\Logins\Students\LeaveRequest;
@@ -29,6 +32,18 @@ Route::get('/', function () {
     return view('Logins.main');
 
 });
+//Reset Password for Security
+Route::get('reset_pass_sec', [ForgotPasswordSecurityController::class, 'showForgetPasswordForm'])->name('reset_pass_sec');
+Route::post('sec-forget-password', [ForgotPasswordSecurityController::class, 'submitForgetPasswordForm'])->name('sec-forget.password.post'); 
+Route::get('sec-reset.password/{token}', [ForgotPasswordSecurityController::class, 'showResetPasswordForm'])->name('sec-reset.password.get');
+Route::post('sec-reset.password', [ForgotPasswordSecurityController::class, 'submitResetPasswordForm'])->name('sec-reset.password.post');
+
+//Reset Password for Admin
+Route::get('reset_pass_admin', [ForgotPasswordAdminController::class, 'showForgetPasswordForm'])->name('reset_pass_admin');
+Route::post('admin-forget-password', [ForgotPasswordAdminController::class, 'submitForgetPasswordForm'])->name('admin-forget.password.post'); 
+Route::get('admin-reset.password/{token}', [ForgotPasswordAdminController::class, 'showResetPasswordForm'])->name('admin-reset.password.get');
+Route::post('admin-reset.password', [ForgotPasswordAdminController::class, 'submitResetPasswordForm'])->name('admin-reset.password.post');
+
 //Forgot Password
 Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget-password');
 Route::post('forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post'); 
@@ -46,6 +61,12 @@ Route::get('SecurityDashboard',[SecurityLogin::class,'SecurityDashboard'])->name
 Route::post('/SecurityLoginVerify',[SecurityLogin::class,'SecurityLoginVerify'])->name('SecurityLoginVerify');
 Route::get('/SecuritySession',[SecurityLogin::class,'SecuritySession'])->name('SecuritySession');
 Route::get('/SecurityLogout',[SecurityLogin::class,'SecurityLogout'])->name('SecurityLogout');
+
+//Admin Controller
+Route::get('/leavereqshist_admin', [AdminController::class,'show_leave_det'])->name('leavereqshist_admin');
+Route::get('/LeaveRequests',[AdminController::class,'LeaveRequests'])->name('LeaveRequests');
+Route::post('/LeaveRequestWarden/{rollno}',[AdminController::class,'warden_approval']);
+Route::post('/LeaveRequestFaculty/{rollno}',[AdminController::class,'faculty_approval']);
 
 // Security Controller
 Route::get('/OutingText',[SecurityController::class,'OutingText'])->name('OutingText');
@@ -75,6 +96,7 @@ Route::get('/LeaveRequestPage',[LeaveRequest::class,'LeaveRequestPage'])->name('
 Route::post('/InsertLeaveRequest',[LeaveRequest::class,'InsertLeaveRequest'])->name('InsertLeaveRequest');
 Route::get('/DisabledDetails',[LeaveRequest::class,'DisabledDetails'])->name('DisabledDetails');
 Route::get('/leavereqshist', [LeaveRequest::class,'show_leave_det'])->name('leavereqshist');
+Route::get('/pendingleavereqshist', [LeaveRequest::class,'show_pending_leave_det'])->name('pendingleavereqshist');
 Route::post('/signup', [StudentController::class, 'insert'])->name('signup');
 Route::get('/main', [StudentController::class,'signup'])->name('signup');
 

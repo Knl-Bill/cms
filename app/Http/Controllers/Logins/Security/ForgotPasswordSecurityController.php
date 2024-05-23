@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Logins\Security;
 use App\Http\Requests;
-use App\Models\forgot_pass;
+
+use App\Models\password_reset_security;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Str;
 use DB;
 use Carbon\Carbon;
 use Mail;
 use Hash;
-class ForgotPasswordController extends Controller
+class ForgotPasswordSecurityController extends Controller
 {
     /**
        * Write code on Method
@@ -18,7 +20,7 @@ class ForgotPasswordController extends Controller
        */
       public function showForgetPasswordForm()
       {
-         return view('profile.forgetPassword');
+         return view('Logins.SecurityPages.forgetPassword');
       }
       /**
        * Write code on Method
@@ -28,21 +30,21 @@ class ForgotPasswordController extends Controller
       public function submitForgetPasswordForm(Request $request)
       {
           $request->validate([
-              'email' => 'required|email|exists:students',
+              'email' => 'required|email|exists:security_logins',
           ]);
   
           $token = Str::random(64);
-          if(DB::table('password_resets')->where('email',$request->email)->exists())
+          if(DB::table('password_reset_securities')->where('email',$request->email)->exists())
           {
             return back()->with('message', 'We have already e-mailed your password reset link! Please check your email');
           }
-          DB::table('password_resets')->insert([
+          DB::table('password_reset_securities')->insert([
               'email' => $request->email, 
               'token' => $token, 
               'created_at' => Carbon::now()
             ]);
   
-          Mail::send('email.forgetPassword', ['token' => $token], function($message) use($request){
+          Mail::send('email.SecurityforgetPassword', ['token' => $token], function($message) use($request){
               $message->to($request->email);
               $message->subject('Reset Password');
           });
@@ -56,7 +58,7 @@ class ForgotPasswordController extends Controller
        */
       public function showResetPasswordForm($token)
       { 
-         return view('profile.forgetPasswordLink', ['token' => $token]);
+         return view('Logins.SecurityPages.forgetPasswordLink', ['token' => $token]);
       }
   
       /**
@@ -67,12 +69,12 @@ class ForgotPasswordController extends Controller
       public function submitResetPasswordForm(Request $request)
       {
           $request->validate([
-              'email' => 'required|email|exists:students',
-              'password' => 'required|string|min:6|confirmed',
+              'email' => 'required|email|exists:security_logins',
+              'password' => 'required|string|min:8|confirmed',
               'password_confirmation' => 'required'
           ]);
   
-          $updatePassword = DB::table('password_resets')
+          $updatePassword = DB::table('password_reset_securities')
                               ->where([
                                 'email' => $request->email, 
                                 'token' => $request->token
@@ -83,11 +85,11 @@ class ForgotPasswordController extends Controller
               return back()->withInput()->with('error', 'Invalid token!');
           }
   
-          $user = DB::table('students')->where('email', $request->email)
+          $user = DB::table('security_logins')->where('email', $request->email)
                       ->update(['password' => Hash::make($request->password)]);
  
-          DB::table('password_resets')->where(['email'=> $request->email])->delete();
+          DB::table('password_reset_securities')->where(['email'=> $request->email])->delete();
   
-          return redirect()->route('StudentLogin')->with('success',"Password Changed Successfully");
+          return redirect()->route('SecurityLogin')->with('success',"Password Changed Successfully");
       }
 }

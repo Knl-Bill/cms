@@ -21,6 +21,17 @@ class LeaveRequest extends Controller
     }
     public function InsertLeaveRequest(Request $request)
     {
+        if($request->noofdays>3)
+        {
+            $rules=([
+                'image' => 'required',
+            ]);
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) 
+            {
+                return back()->withInput()->withErrors(['image' => 'E-Mail Screenshot is required for more than 3 days']);
+            }
+        }
         $user = Session::get('user');
         $result=new Leavereq();
         $result->rollno=$user->rollno;
@@ -32,6 +43,8 @@ class LeaveRequest extends Controller
         $result->outime=$request->outime;
         $result->indate=$request->indate;
         $result->intime=$request->intime;
+        $result->faculty_email=$user->faculty_advisor;
+        $result->warden_email=$user->warden;
         $result->noofdays=$request->noofdays;        
         if ($request->hasFile('image')) 
         {
@@ -68,9 +81,16 @@ class LeaveRequest extends Controller
     public function show_leave_det()
     {
         $user = Session::get('user');
-        $stmt="select * from leavereqs where rollno='". $user->rollno ."';"; 
+        $stmt="select * from leavereq_histories where rollno='". $user->rollno ."' order by outdate desc;"; 
         $students = DB::select($stmt);
         return view('Logins.StudentPages.LeaveReqHistory',['students'=>$students]);
+    }
+    public function show_pending_leave_det()
+    {
+        $user = Session::get('user');
+        $stmt="select * from leavereqs where rollno='". $user->rollno ."' order by outdate desc;"; 
+        $students = DB::select($stmt);
+        return view('Logins.StudentPages.PendingLeaveRequest',['students'=>$students]);
     }
 
 

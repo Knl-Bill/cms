@@ -19,8 +19,8 @@
                 <thead>
                     <tr>
                         <th>Roll No</th>
-                        <th>Out Time</th>
-                        <th>In Time</th>
+                        <th>Out Date and Time</th>
+                        <th>In Date and Time</th>
                         <th>Name</th>
                         <th>Phone No</th>
                         <th>E-Mail</th>
@@ -34,8 +34,8 @@
                     @foreach($OutingHistory as $outing)
                     <tr class="{{$outing->gender == 'Male'? 'MaleRow' : 'FemaleRow'}}">
                         <td>{{$outing->rollno}}</td>
-                        <td>{{$outing->outtime}}</td>
-                        <td>{{$outing->intime}}</td>
+                        <td>{{date('d/m/Y h:i a',strtotime($outing->outtime))}}</td>
+                        <td>{{$outing->intime== NULL?NULL: date('d/m/Y h:i a',strtotime($outing->intime))}}</td>
                         <td>{{$outing->name}}</td>
                         <td>{{$outing->phoneno}}</td>
                         <td>{{$outing->email}}</td>

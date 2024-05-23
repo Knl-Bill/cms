@@ -26,37 +26,42 @@ class OutingController extends Controller
             return redirect()->back()->with('error',"$rollno is not a student of NITPY");
         }
 
-        $existingOuting = DB::table('outing_table')->where('rollno',$rollno)->whereNULL('intime')->first();
-
-        if($existingOuting)
+        $existingOuting = DB::table('outing__table')->where('rollno',$rollno)->whereNULL('intime')->first();
+        $security = Session::get('user');
+        if($security)
         {
-            $intime = Carbon::now()->setTimezone('Asia/Kolkata');
-            DB::table('outing_table')->where('id',$existingOuting->id)->update(['intime' => $intime]);
-            return redirect()->back()->with('success',"Outing Closed for $rollno at $intime");
+            if($existingOuting)
+            {
+                $intime = Carbon::now()->setTimezone('Asia/Kolkata');
+                DB::table('outing__table')->where('id',$existingOuting->id)->update(['intime' => $intime]);
+                return redirect()->back()->with('success',"Outing Closed for $rollno at $intime");
+            }
+            else{
+                $outtime = Carbon::now()->setTimezone('Asia/Kolkata');
+                DB::table('outing__table')->insert([
+                    'rollno' => $student->rollno,
+                    'name' => $student->name,
+                    'phoneno' => $student->phoneno,
+                    'email' => $student->email,
+                    'year' => $student->batch,
+                    'gender' => $student->gender,
+                    'hostel' => $student->hostelname,
+                    'roomno' => $student->roomno,
+                    'outtime' => $outtime,
+                    'intime' => null,
+                ]);
+                return redirect()->back()->with('success',"Outing Started for $rollno at $outtime");
+            }
         }
-        else{
-            $outtime = Carbon::now()->setTimezone('Asia/Kolkata');
-            DB::table('outing_table')->insert([
-                'rollno' => $student->rollno,
-                'name' => $student->name,
-                'phoneno' => $student->phoneno,
-                'email' => $student->email,
-                'year' => $student->batch,
-                'gender' => $student->gender,
-                'hostel' => $student->hostelname,
-                'roomno' => $student->roomno,
-                'outtime' => $outtime,
-                'intime' => null,
-            ]);
-            return redirect()->back()->with('success',"Outing Started for $rollno at $outtime");
-        }
+        else
+            return redirect()->back()->with('error','You are Logged-in as a Guest');
     }
     public function OutingStatus()
     {
         $security = Session::get('user');
         if($security)
         {
-            $OutingHistory = DB::table('outing_table')->orderBy('outtime','desc')->get(); 
+            $OutingHistory = DB::table('outing__table')->orderBy('outtime','desc')->get(); 
             $name = "Outing History";
             return view('Logins.SecurityPages.Outing.OutingHistory',['OutingHistory' => $OutingHistory, 'Name' => $name]);
         }
@@ -69,7 +74,7 @@ class OutingController extends Controller
         $security = Session::get('user');
         if($security)
         {
-            $OutingHistory = DB::table('outing_table')->whereNULL('intime')->orderBy('outtime','desc')->get(); 
+            $OutingHistory = DB::table('outing__table')->whereNULL('intime')->orderBy('outtime','desc')->get(); 
             $name = "Unclosed Outing";
             return view('Logins.SecurityPages.Outing.OutingHistory',['OutingHistory' => $OutingHistory, 'Name' => $name]);
         }
@@ -83,7 +88,7 @@ class OutingController extends Controller
         if($security)
         {
             $gender = "MALE";
-            $OutingHistory = DB::table('outing_table')->where('gender',$gender)->orderBy('outtime','desc')->get(); 
+            $OutingHistory = DB::table('outing__table')->where('gender',$gender)->orderBy('outtime','desc')->get(); 
             $name = "Boys Outing";
             return view('Logins.SecurityPages.Outing.OutingHistory',['OutingHistory' => $OutingHistory, 'Name' => $name]);
         }
@@ -97,7 +102,7 @@ class OutingController extends Controller
         if($security)
         {
             $gender = "FEMALE";
-            $OutingHistory = DB::table('outing_table')->where('gender',$gender)->orderBy('outtime','desc')->get(); 
+            $OutingHistory = DB::table('outing__table')->where('gender',$gender)->orderBy('outtime','desc')->get(); 
             $name = "Girls Outing";
             return view('Logins.SecurityPages.Outing.OutingHistory',['OutingHistory' => $OutingHistory, 'Name' => $name]);
         }

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('outing_table', function (Blueprint $table) {
+        Schema::create('outing__table', function (Blueprint $table) {
             $table->id();
             $table->string('rollno');
             $table->string('name');
@@ -36,6 +36,7 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('outing__table');
         //
     }
 };

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('admin_login', function (Blueprint $table) {
+        Schema::create('admin_logins', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('phoneno')->unique();
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('admin_logins');
     }
 };
