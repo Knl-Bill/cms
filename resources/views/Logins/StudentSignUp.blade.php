@@ -161,8 +161,9 @@
                     <label for="faculty_advisor" class="font">Faculty Advisor</label>
                     <select id="faculty_advisor" name="faculty_advisor" required>
                         <option value="" selected disabled hidden>Select Your Faculty Advisor</option>
-                        <option value="sanjay.bankapur@nitpy.ac.in">Dr. Sanjay Bankapur</option>
-                        <option value="lakshmi@nitpy.ac.in">Dr. Lakshmi Sutha . G</option>
+                        @foreach($students as $stud)
+                        <option value= "{{$stud->email}}" >{{$stud->name}}</option>
+                        @endforeach
                     </select>
                     @if($errors->has('faculty_advisor'))
                         <span class="text-danger">{{ $errors->first('faculty_advisor') }}</span>
@@ -172,9 +173,9 @@
                     <label for="warden" class="font">Warden</label>
                     <select id="warden" name="warden" required>
                         <option value="" selected disabled hidden>Select Your Warden</option>
-                        <option value="chandrashekar.r@nitpy.ac.in">Dr. Chandrashekar . R</option>
-                        <option value="sunanda.a@nitpy.ac.in">Dr. Sunanda Ambulker</option>
-                        <option value="hemachander.a@nitpy.ac.in">Dr. Hemachander . A</option>
+                        @foreach($students as $stud)
+                        <option value= "{{$stud->email}}" >{{$stud->name}}</option>
+                        @endforeach
                     </select>
                     @if($errors->has('warden'))
                         <span class="text-danger">{{ $errors->first('warden') }}</span>

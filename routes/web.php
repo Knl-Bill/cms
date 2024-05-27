@@ -4,6 +4,8 @@ use App\Http\Controllers\LeavereqController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Logins\Admin\AdminController;
 use App\Http\Controllers\Logins\Admin\ForgotPasswordAdminController;
+use App\Http\Controllers\Logins\Admin\AdminProfile;
+use App\Http\Controllers\Logins\Security\SecurityProfile;
 use App\Http\Controllers\Logins\Security\ForgotPasswordSecurityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Logins\LoginController;
@@ -112,7 +114,7 @@ Route::get('/AdminLogout',[AdminLogin::class,'AdminLogout'])->name('AdminLogout'
 // Route::get('/leavereqs', [LeavereqController::class,'show_leave_det'])->name('leavereqs');
 
 
-//Profile Section
+//Student Profile Section
 Route::get('/studupdate', [stud_profile::class,'changePassword'])->name('updatepassword');
 Route::post('/change-password', [stud_profile::class, 'changePasswordSave'])->name('postChangePassword');
 Route::post('/change-roomno', [stud_profile::class, 'changeroomno'])->name('postChangeroomno');
@@ -120,6 +122,17 @@ Route::post('/change-hostel', [stud_profile::class, 'changehostel'])->name('post
 Route::post('/change-phoneno', [stud_profile::class, 'changephoneno'])->name('postChangephoneno');
 Route::post('/change-email', [stud_profile::class, 'changeemail'])->name('postChangeemail');
 
+//Admin Profile Section
+Route::get('AdminProfile',[AdminLogin::class,'AdminProfile'])->name('AdminProfile');
+Route::post('/adm_change-password', [AdminProfile::class, 'changePasswordSave'])->name('postadmChangePassword');
+Route::post('/adm_change-phoneno', [AdminProfile::class, 'changephoneno'])->name('postadmChangephoneno');
+Route::post('/adm_change-email', [AdminProfile::class, 'changeemail'])->name('postadmChangeemail');
+
+//Security Profile Section
+Route::get('SecurityProfile',[SecurityLogin::class,'SecurityProfile'])->name('SecurityProfile');
+Route::post('/sec_change-password', [SecurityProfile::class, 'changePasswordSave'])->name('postsecChangePassword');
+Route::post('/sec_change-phoneno', [SecurityProfile::class, 'changephoneno'])->name('postsecChangephoneno');
+Route::post('/sec_change-email', [SecurityProfile::class, 'changeemail'])->name('postsecChangeemail');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

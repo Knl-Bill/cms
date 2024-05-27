@@ -26,15 +26,21 @@ class LeaveRequest extends Controller
             $rules=([
                 'image' => 'required',
             ]);
+            
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) 
             {
                 return back()->withInput()->withErrors(['image' => 'E-Mail Screenshot is required for more than 3 days']);
             }
         }
+        
         $user = Session::get('user');
         $result=new Leavereq();
         $result->rollno=$user->rollno;
+        if (DB::table('leavereqs')->where('rollno',$user->rollno)->exists()) 
+        {
+            return back()->withInput()->withErrors(['rollno' => 'Already a request is pending!']);
+        }
         $result->name=$user->name;
         $result->phoneno=$user->phoneno;
         $result->placeofvisit=$request->placeofvisit;

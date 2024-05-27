@@ -10,6 +10,7 @@
     <div class="user">
 
     </div>
+    <a id="profile"> Profile</a>
     @if(Session::has('message'))
         <span class="text-danger">{{ Session::get('message')  }}</span>
     @endif
@@ -48,6 +49,10 @@
 
         document.getElementById('LeaveId').addEventListener('click', function() {
             window.location.href = '{{route('LeaveRequests')}}';
+        });
+
+        document.getElementById('profile').addEventListener('click', function() {
+            window.location.href = '{{route('AdminProfile')}}';
         });
     </script>
 </body>

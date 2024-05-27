@@ -27,8 +27,7 @@ class AdminController extends Controller
                 session(['role' => 'warden']);
             }
         }
-        $email=$admin->email;
-        $fac_war="select * from leavereqs where faculty_email='". $email ."' or warden_email='".$email."';"; 
+        $fac_war="select * from leavereqs where faculty_email='". $adminEmail ."' or warden_email='".$adminEmail."';"; 
         $students=DB::select($fac_war);
         if($students==NULL)
             return back()->with('message','There are no pending leave requests');
@@ -53,6 +52,8 @@ class AdminController extends Controller
             $result->indate=$student->indate;
             $result->intime=$student->intime;
             $result->noofdays=$student->noofdays;
+            $result->faculty_email=$student->faculty_email;
+            $result->warden_email=$student->warden_email;
             $result->warden=1;
             $result->faculty_adv=$student->faculty_adv;
             $result->status="Approved";
@@ -90,6 +91,8 @@ class AdminController extends Controller
             $result->intime=$student->intime;
             $result->noofdays=$student->noofdays;
             $result->faculty_adv=$student->faculty_adv;
+            $result->faculty_email=$student->faculty_email;
+            $result->warden_email=$student->warden_email;
             $result->warden=2;
             $result->status="Declined";
             $result->image=$student->image;
@@ -128,6 +131,8 @@ class AdminController extends Controller
             $result->intime=$student->intime;
             $result->noofdays=$student->noofdays;
             $result->warden=$student->warden;
+            $result->faculty_email=$student->faculty_email;
+            $result->warden_email=$student->warden_email;
             $result->faculty_adv=2;
             $result->status="Declined";
             $result->image=$student->image;
@@ -143,7 +148,9 @@ class AdminController extends Controller
     }
     public function show_leave_det()
     {
-        $students = DB::select('select * from leavereq_histories order by outdate desc');
+        $admin = Session::get('user');
+        $email=$admin->email;
+        $students = DB::select("select * from leavereq_histories where faculty_email='". $email ."' or warden_email='".$email."' order by outdate desc;");
         return view('Logins.AdminPages.LeaveReqHistory',['students'=>$students]);
     }
 }

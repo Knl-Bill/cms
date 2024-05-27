@@ -30,6 +30,9 @@
         @csrf
         <label for="rollno">Roll No: - </label>
         <input class="disabled" disabled id="rollno" type="text" name="rollno" placeholder="Roll Number">
+        @if($errors->has('rollno'))
+            <span class="text-danger">{{ $errors->first('rollno') }}</span>
+        @endif
         <br><br>
         <label for="name">Name: - </label>
         <input class="disabled" disabled id="name" type="text" name="name" placeholder="Full Name (as in ID card)">

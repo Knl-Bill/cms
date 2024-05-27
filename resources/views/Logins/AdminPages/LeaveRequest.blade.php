@@ -14,6 +14,7 @@
 <div class="status">
     <a href="{{ route('leavereqshist_admin') }}">See Leave History</a>
 </div>
+
 <br><br>
 @if (Session::get('success'))
     <span class="text-safe" role="alert">
@@ -23,6 +24,7 @@
 <div class="accordion" id="accordionExample">
   @foreach ($students as $stud)
   <div class="accordion-item" >
+    
     <h2 class="accordion-header">
     @if(session()->has('role'))
       @if(session('role')=="faculty")

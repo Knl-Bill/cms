@@ -10,6 +10,7 @@
     <div class="user">
 
     </div>
+    <a id="profile"> Profile</a>
     <div>
         <div class="Outing">
             <button id="OutingId">Outing</button>
@@ -52,6 +53,9 @@
         });
         document.getElementById('OutingId').addEventListener('click', function() {
             window.location.href = '{{route('OutingText')}}';
+        });
+        document.getElementById('profile').addEventListener('click', function() {
+            window.location.href = '{{route('SecurityProfile')}}';
         });
     </script>
 </body>
