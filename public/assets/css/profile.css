@@ -1,88 +1,174 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@264&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@264&display=swap'); */
 
 .font {
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-  font-variation-settings:
-    "slnt" 0;
-}
-.container {
-    display: block;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-} 
-.font1 {
-    font-family: "Inter", sans-serif;
-    color: #334ee5;
-    text-align: left;
-    padding-top: 25px;
-}
-.heading-update{
-    font-family: "Inter", sans-serif;
-    color: #334ee5;
-    text-align: center;
-    background-color: #9ec1f8;
-    padding-bottom: 25px;
-    padding-top: 25px;
-}
-.text-below-image {
-    font-size: 16px;
-    color: #333;
-    margin-top: 20px;
-    text-align: center;
-    padding-bottom: 20px;
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
-    font-variation-settings:
-    "slnt" 0;
-} 
-.text-below-image a {
-    color: #2b6fdb;
-    text-decoration: none;
-    font-weight: 500;
-    
+    font-variation-settings: "slnt" 0;
+}
+
+/* Navbar and Main Home Page */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.custom-navbar {
+    background-color: #1625AD;
+    padding: 5px 15px;
+    margin: 0;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    position: fixed;
+}
+.custom-nav-items {
+    margin-left: auto;
+    font-size: 25px;
+}
+.logo {
+    width: 80px;
+    height: auto;
+}
+.home-btn, .profile-btn, .logout-btn {
+    color: white;
+    cursor: pointer;
+}
+.home-btn:hover, .profile-btn:hover, .logout-btn:hover {
+    color: white;
+}
+.logout-btn {
+    background-color: rgb(210, 37, 37);
+    padding: 5px;
+    margin-top: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+.logout-btn:hover {
+    background-color: rgb(231, 18, 18);
+}
+.profile-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+    }
+}
+.details {
+    width: 400px;
+    float: left;
+}
+.heading {
+    color: #1625AD;
+    text-align: center;
+    font-size: 36px;
+}
+.font1 {
+    color: #1625AD;
+    text-align: center;
+    font-size: 24px;
+}
+.forms {
+    display: inline-block;
+    vertical-align: top;
+    width: calc(100% - 600px); 
+    max-height: 600px; 
+    overflow-y: scroll;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 .form-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-left: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
 }
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
-label {
+.labels {
     display: block;
     margin-bottom: 5px;
 }
-input[type="text"], input[type="password"], select {
+.inputs {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     width: 100%;
-    box-sizing: border-box;
+    background-color: #e3f1fc;
 }
-.button {
-    text-align: center;
+.form-group.button {
+    display: flex;
+    justify-content: center;
 }
-input[type="submit"] {
-    background-color: #334ee5;
+.submit-btn {
+    background-color: #1625AD;
     color: white;
     padding: 10px 20px;
-    border: none;
     border-radius: 5px;
     cursor: pointer;
-    margin: 0 auto;
 }
-input[type="submit"]:hover {
-    background-color: #1d3adb;
+.submit-btn:hover {
+    background-color: #172add;
 }
+.yes-button {
+    padding: 5px 20px;
+    background-color: green;
+    border-radius: 10px;
+}
+.no-button {
+    padding: 5px 20px;
+    background-color: red;
+    border-radius: 10px;
+}
+
+@media (max-width: 1200px) {
+    .details, .forms {
+        width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    
+}
+
+@media (max-width: 768px) {
+    .details {
+        order: 1;
+    }
+
+    .forms {
+        order: 2;
+    }
+}
+
+@media (max-width: 576px) {
+    .heading {
+        font-size: 28px;
+    }
+}
+
+/* Pop-up */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border: 3px solid #ccc;
+    z-index: 9999;
+}
+/* Alerts and Errors */
 .alertalert-danger{
     text-decoration: none;
     display: flex;
