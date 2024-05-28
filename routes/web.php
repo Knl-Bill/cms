@@ -16,6 +16,7 @@ use App\Http\Controllers\Logins\StudentLogin;
 use App\Http\Controllers\Logins\Students\OutingHistory;
 use App\Http\Controllers\Logins\Security\OutingController;
 use App\Http\Controllers\Logins\AdminLogin;
+use App\Http\Controllers\Logins\Security\LeaveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,6 +72,8 @@ Route::post('/LeaveRequestFaculty/{rollno}',[AdminController::class,'faculty_app
 // Security Controller
 Route::get('/OutingText',[SecurityController::class,'OutingText'])->name('OutingText');
 Route::get('/LeaveText',[SecurityController::class,'LeaveText'])->name('LeaveText');
+Route::get('/OutingScanner',[SecurityController::class,'OutingScanner'])->name('OutingScanner');
+Route::get('/LeaveScanner',[SecurityController::class,'LeaveScanner'])->name('LeaveScanner');
 
 // StudentLogin Controller
 Route::get('/StudentDashboard',[StudentLogin::class,'StudentDashboard'])->name('StudentDashboard');
@@ -90,6 +93,11 @@ Route::get('/UnclosedOuting',[OutingController::class,'UnclosedOuting'])->name('
 Route::get('/BoysOuting',[OutingController::class,'BoysOuting'])->name('BoysOuting');
 Route::get('/GirlsOuting',[OutingController::class,'GirlsOuting'])->name('GirlsOuting');
 
+// Security Pages's Leave Controller
+Route::post('/InsertLeave',[LeaveController::class,'InsertLeave'])->name('InsertLeave');
+Route::post('/InsertScannerLeave',[LeaveController::class,'InsertScannerLeave'])->name('InsertScannerLeave');
+Route::get('/LeaveStatus',[LeaveController::class,'LeaveStatus'])->name('LeaveStatus');
+Route::get('/UnclosedLeaves',[LeaveController::class,'UnclosedLeaves'])->name('UnclosedLeaves');
 
 // Student Controllers
 Route::get('/LeaveRequestPage',[LeaveRequest::class,'LeaveRequestPage'])->name('LeaveRequestPage');

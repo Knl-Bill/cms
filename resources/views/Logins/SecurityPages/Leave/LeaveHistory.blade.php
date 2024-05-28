@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leave Registration</title>
+    <title>Outing History</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="assets/css/SecurityOuting.css">
+    <!-- <link rel="stylesheet" href="assets/css/main.css"> -->
+    <link rel="stylesheet" href="assets/css/SecurityOutingHistory.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -29,68 +30,45 @@
         </div>
     </nav>
     <div class="outing-container">
-        @if(Session::has('success'))
-            <div class="alert alert-success">
-                {{ Session::get('success') }}
-            </div>
-        @endif
-
-        @if(Session::has('error'))
-            <div class="alert alert-danger">
-                {{ Session::get('error') }}
-            </div>
-        @endif
-        <div class="Scanner">
-            <button class="submit-btn" id="Scanner">Leave Scanner</button>
+        <div class="header">
+            <h1 class="heading font">
+                {{$Name}}
+            </h1>
         </div>
         <br>
-        <div class="form-container">
-            <form action="/InsertLeave" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label class="labels" for="student">Enter a Roll No: - </label>
-                    <input class="inputs" type="text" name="rollno" placeholder="Roll No" required>
-                </div>
-                <div class="form-group">
-                    <label class="labels" for="student">Enter Out Date: - </label>
-                    <input class="inputs" type="date" name="outdate" required>
-                </div>
-                <div class="form-group">
-                    <label class="labels" for="student">Gate: - </label>
-                    <select class="inputs" name="gate" id="gate">
-                      <option value="Main">Main</option>
-                      <option value="Poovam">Poovam</option>
-                    </select>
-                </div>
-                <div class="form-group button">
-                    <button class="submit-btn" type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
-        
-        <div class="ButtonContainer">
-            <div class="OutingStatus">
-                <button class="submit-btn" id="OutingStatus">Leave Status</button>
-            </div>
-            <div class="Unclosed Outings">
-                <button class="submit-btn" id="UnclosedOuting">Unclosed Leaves</button>
-            </div>
+        <div class="content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Roll No</th>
+                        <th>Out Date and Time</th>
+                        <th>In Date and Time</th>
+                        <th>Name</th>
+                        <th>Phone No</th>
+                        <th>Place of Visit</th>
+                        <th>Purpose</th>
+                        <th>Security</th>
+                        <th>Gate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($LeaveHistory as $leave)
+                    <tr>
+                        <td>{{$leave->rollno}}</td>
+                        <td>{{date('d/m/Y h:i a',strtotime($leave->outtime))}}</td>
+                        <td>{{$leave->intime== NULL?NULL: date('d/m/Y h:i a',strtotime($leave->intime))}}</td>
+                        <td>{{$leave->name}}</td>
+                        <td>{{$leave->phoneno}}</td>
+                        <td>{{$leave->placeofvisit}}</td>
+                        <td>{{$leave->purpose}}</td>
+                        <td>{{$leave->Security}}</td>
+                        <td>{{$leave->gate}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-    <script>
-        document.getElementById('Scanner').addEventListener('click', function() {
-            window.location.href = '{{route('LeaveScanner')}}';
-        });
-
-        document.getElementById('OutingStatus').addEventListener('click', function() {
-            window.location.href = '{{route('LeaveStatus')}}';
-        });
-
-        document.getElementById('UnclosedOuting').addEventListener('click', function() {
-            window.location.href = '{{route('UnclosedLeaves')}}';
-        });
-
-    </script>
     <script>
         document.getElementById('logout').addEventListener('click', function() {
         // Make an AJAX request to trigger the Logout function
@@ -111,7 +89,6 @@
                 console.error('Error during logout:', error);
             });
         });
-
     </script>
 </body>
 </html>

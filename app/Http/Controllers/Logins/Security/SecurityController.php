@@ -16,4 +16,12 @@ class SecurityController extends Controller
     {
         return view('Logins/SecurityPages.Leave.TextInput');
     }
+    public function OutingScanner()
+    {
+        return view('Logins.SecurityPages.Outing.OutingScanner');
+    }
+    public function LeaveScanner()
+    {
+        return view('Logins.SecurityPages.Leave.LeaveScanner');
+    }
 }

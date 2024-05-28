@@ -25,7 +25,7 @@ return new class extends Migration
             $table->date('indate');
             $table->time('intime');
             $table->string('noofdays');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('faculty_email');
             $table->string('warden_email');
             $table->integer('faculty_adv')->default(0);
