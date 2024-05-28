@@ -14,22 +14,25 @@ class OutingController extends Controller
     public function InsertOuting(Request $request)
     {
         $request->validate([
-            'rollno' => 'required|string'
+            'rollno' => 'required|string',
+            'gate' => 'required|string',
         ]);
-        
-        $rollno = strtoupper($request->input('rollno'));
-
-        $student = DB::table('students')->where('rollno',$rollno)->first();
-
-        if(!$student)
-        {
-            return redirect()->back()->with('error',"$rollno is not a student of NITPY");
-        }
-
-        $existingOuting = DB::table('outing__table')->where('rollno',$rollno)->whereNULL('intime')->first();
         $security = Session::get('user');
         if($security)
         {
+            $rollno = strtoupper($request->input('rollno'));
+            $gate = $request->input('gate');
+
+            $student = DB::table('students')->where('rollno',$rollno)->first();
+
+            if(!$student)
+            {
+                return redirect()->back()->with('error',"$rollno is not a student of NITPY");
+            }
+
+            $existingOuting = DB::table('outing__table')->where('rollno',$rollno)->whereNULL('intime')->first();
+        
+            $security_name = $security->name;
             if($existingOuting)
             {
                 $intime = Carbon::now()->setTimezone('Asia/Kolkata');
@@ -49,6 +52,8 @@ class OutingController extends Controller
                     'roomno' => $student->roomno,
                     'outtime' => $outtime,
                     'intime' => null,
+                    'gate' => $gate,
+                    'security' => $security_name,
                 ]);
                 return redirect()->back()->with('success',"Outing Started for $rollno at $outtime");
             }

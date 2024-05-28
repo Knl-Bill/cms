@@ -14,20 +14,18 @@ return new class extends Migration
     public function up()
     {
         //
-        Schema::create('outing__table', function (Blueprint $table) {
+        Schema::create('leavehistory', function (Blueprint $table) {
             $table->id();
             $table->string('rollno');
             $table->string('name');
             $table->string('phoneno');
-            $table->string('email');
-            $table->string('year');
-            $table->string('gender');
-            $table->string('hostel');
-            $table->string('roomno');
+            $table->string('placeofvisit');
+            $table->string('purpose');
             $table->dateTime('outtime');
             $table->dateTime('intime')->nullable();
-            $table->string('security');
+            $table->string('Security');
             $table->string('gate');
+            $table->timestamps();
         });
     }
 
@@ -38,7 +36,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('outing__table');
         //
+        Schema::dropIfExists('leavehistory');
     }
 };

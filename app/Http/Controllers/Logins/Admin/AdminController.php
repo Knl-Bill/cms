@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Leavereq_history;
 use DB;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -57,8 +58,12 @@ class AdminController extends Controller
             $result->faculty_adv=$student->faculty_adv;
             $result->status="Approved";
             $result->image=$student->image;
+
+            $formattedOutdate = Carbon::parse($student->outdate)->format('Ymd');
+            $BarcodeContent = $rollno . '_' . $formattedOutdate;
+
             $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-            $barcode = $generator->getBarcode($rollno, $generator::TYPE_CODE_128);
+            $barcode = $generator->getBarcode($BarcodeContent, $generator::TYPE_CODE_128);
             $path = 'barcodes/' . $rollno . '_' . $student->outdate . '.png';
             Storage::disk('public')->put($path, $barcode);
             //$filename = $result->rollno . '_' . $result->outdate;

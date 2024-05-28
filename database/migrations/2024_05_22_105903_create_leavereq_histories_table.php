@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('noofdays');
             $table->integer('faculty_adv')->default(0);
             $table->integer('warden')->default(0);
-            $table->string('image');
-            $table->string('barcode');
+            $table->string('image')->nullable();
+            $table->string('barcode')->nullable();
             $table->string('status');
             $table->timestamps();
         });

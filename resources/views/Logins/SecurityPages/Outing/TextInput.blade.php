@@ -41,6 +41,10 @@
                 {{ Session::get('error') }}
             </div>
         @endif
+        <div class="Scanner">
+            <button class="submit-btn" id="Scanner">Scanner</button>
+        </div>
+        <br>
         <div class="form-container">
             <form action="/InsertOuting" method="POST">
                 @csrf
@@ -48,12 +52,19 @@
                     <label class="labels" for="student">Enter a Roll No: - </label>
                     <input class="inputs" type="text" name="rollno" required>
                 </div>
+                <div class="form-group">
+                    <label class="labels" for="student">Gate: - </label>
+                    <select name="gate" id="gate" class="inputs">
+                        <option value="Main">Main</option>
+                        <option value="Poovam">Poovam</option>
+                    </select>
+                </div>
                 <div class="form-group button">
                     <button class="submit-btn" type="submit">Submit</button>
                 </div>
             </form>
         </div>
-    
+        
         <div class="ButtonContainer">
             <div class="OutingStatus">
                 <button class="submit-btn" id="OutingStatus">Outing Status</button>
@@ -70,6 +81,10 @@
         </div>
     </div>
     <script>
+        document.getElementById('Scanner').addEventListener('click', function() {
+            window.location.href = '{{route('OutingScanner')}}';
+        });
+
         document.getElementById('OutingStatus').addEventListener('click', function() {
             window.location.href = '{{route('OutingStatus')}}';
         });

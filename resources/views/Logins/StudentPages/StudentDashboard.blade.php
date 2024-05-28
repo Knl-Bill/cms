@@ -45,7 +45,7 @@
         </div>
         <div class="item">
             <img src="assets/images/outing.webp" alt="Outing" height="250px">
-            <button id="Outing">Outing Request</button>
+            <button id="Outing">Outing History</button>
         </div>
         <div class="item ">
             <img src="assets/images/student.webp" alt="Admin" height="250px">
