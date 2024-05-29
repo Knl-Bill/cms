@@ -43,6 +43,7 @@
                     <th>Roll No</th>
                     <th>Out Date and Time</th>
                     <th>In Date and Time</th>
+                    <th>Registration by</th>
                 </tr>
             </thead>
             <tbody>
@@ -51,6 +52,7 @@
                     <td>{{$outing->rollno}}</td>
                     <td>{{date('d/m/Y h:i a',strtotime($outing->outtime))}}</td>
                     <td>{{date('d/m/Y h:i a',strtotime($outing->intime))}}</td>
+                    <td>{{$outing->security}}</td>
                 </tr>
                 @endforeach
             </tbody>

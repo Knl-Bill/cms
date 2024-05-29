@@ -23,8 +23,10 @@ return new class extends Migration
             $table->string('purpose');
             $table->dateTime('outtime');
             $table->dateTime('intime')->nullable();
-            $table->string('Security');
-            $table->string('gate');
+            $table->string('outregistration');
+            $table->string('outgate');
+            $table->string('inregistration')->nullable();
+            $table->string('ingate')->nullable();
             $table->timestamps();
         });
     }
