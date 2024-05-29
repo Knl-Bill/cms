@@ -34,9 +34,8 @@
         </div>
         <h1 class="heading font">DASHBOARD</h1>
     </div>
-    <div class="dashboard container">
-        <div class="item">
-            <img src="assets/images/outing.webp" alt="Outing" height="250px">
+    <div>
+        <div class="Outing">
             <button id="OutingId">Outing</button>
         </div>
         <div class="item">
@@ -76,6 +75,9 @@
         });
         document.getElementById('OutingId').addEventListener('click', function() {
             window.location.href = '{{route('OutingText')}}';
+        });
+        document.getElementById('profile').addEventListener('click', function() {
+            window.location.href = '{{route('SecurityProfile')}}';
         });
     </script>
 </body>

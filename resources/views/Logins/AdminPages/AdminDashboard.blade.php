@@ -80,6 +80,10 @@
         document.getElementById('LeaveId').addEventListener('click', function() {
             window.location.href = '{{route('LeaveRequests')}}';
         });
+
+        document.getElementById('profile').addEventListener('click', function() {
+            window.location.href = '{{route('AdminProfile')}}';
+        });
     </script>
 </body>
 </html>

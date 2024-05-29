@@ -30,6 +30,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->string('barcode')->nullable();
             $table->string('status');
+            $table->string('faculty_email');
+            $table->string('warden_email');
             $table->timestamps();
         });
     }

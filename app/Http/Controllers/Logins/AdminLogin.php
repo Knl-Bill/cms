@@ -63,4 +63,11 @@ class AdminLogin extends Controller
         Session::forget('user');
         return redirect('/');
     }
+    public function AdminProfile()
+    {
+        $user = Session::get('user');
+        $stmt="select * from admin_logins where email='". $user->email ."';"; 
+        $students = DB::select($stmt);
+        return view('Logins.AdminPages.Admin_Profile',['students'=>$students]);
+    }
 }
