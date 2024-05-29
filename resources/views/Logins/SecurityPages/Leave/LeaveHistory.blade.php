@@ -47,8 +47,10 @@
                         <th>Phone No</th>
                         <th>Place of Visit</th>
                         <th>Purpose</th>
-                        <th>Security</th>
-                        <th>Gate</th>
+                        <th>Out-Registration</th>
+                        <th>Out-Gate</th>
+                        <th>In-Registration</th>
+                        <th>In-Gate</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,8 +63,10 @@
                         <td>{{$leave->phoneno}}</td>
                         <td>{{$leave->placeofvisit}}</td>
                         <td>{{$leave->purpose}}</td>
-                        <td>{{$leave->Security}}</td>
-                        <td>{{$leave->gate}}</td>
+                        <td>{{$leave->outregistration}}</td>
+                        <td>{{$leave->outgate}}</td>
+                        <td>{{$leave->inregistration}}</td>
+                        <td>{{$leave->ingate}}</td>
                     </tr>
                     @endforeach
                 </tbody>

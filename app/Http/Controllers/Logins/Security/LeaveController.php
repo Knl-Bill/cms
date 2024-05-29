@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class LeaveController extends Controller
 {
@@ -38,7 +39,14 @@ class LeaveController extends Controller
             if($existingLeave)
             {
                 $intime = Carbon::now()->setTimezone('Asia/Kolkata');
-                DB::table('leavehistory')->where('id',$existingLeave->id)->update(['intime' => $intime]);
+                DB::table('leavehistory')->where('id',$existingLeave->id)->update(['intime' => $intime, 'inregistration' => $security_name, 'ingate' => $gate]);
+                if($student && $student->barcode)
+                {
+                    // Delete the Barcode Image
+                    Storage::disk('public')->delete($student->barcode);
+                    // Delete the row from leavereq_histories table
+                    DB::table('leavereq_histories')->where('id',$student->id)->delete();
+                }
                 return redirect()->back()->with('success',"Leave Closed for $rollno at $intime");
             }
             else{
@@ -50,9 +58,11 @@ class LeaveController extends Controller
                     'placeofvisit' => $student->placeofvisit,
                     'purpose' => $student->purpose,
                     'outtime' => $outtime,
+                    'outregistration' => $security_name,
+                    'outgate' => $gate,
                     'intime' => null,
-                    'security' => $security_name,
-                    'gate' => $gate,
+                    'inregistration' => null,
+                    'ingate' => null,
                 ]);
                 return redirect()->back()->with('success',"Leave Started for $rollno at $outtime");
             }
@@ -88,7 +98,14 @@ class LeaveController extends Controller
             if($existingLeave)
             {
                 $intime = Carbon::now()->setTimezone('Asia/Kolkata');
-                DB::table('leavehistory')->where('id',$existingLeave->id)->update(['intime' => $intime]);
+                DB::table('leavehistory')->where('id',$existingLeave->id)->update(['intime' => $intime, 'inregistration' => $security_name, 'ingate' => $gate]);
+                if($student && $student->barcode)
+                {
+                    // Delete the Barcode Image
+                    Storage::disk('public')->delete($student->barcode);
+                    // Delete the row from leavereq_histories table
+                    DB::table('leavereq_histories')->where('id',$student->id)->delete();
+                }
                 return redirect()->back()->with('success',"Leave Closed for $rollno at $intime");
             }
             else{
@@ -100,9 +117,11 @@ class LeaveController extends Controller
                     'placeofvisit' => $student->placeofvisit,
                     'purpose' => $student->purpose,
                     'outtime' => $outtime,
+                    'outregistration' => $security_name,
+                    'outgate' => $gate,
                     'intime' => null,
-                    'Security' => $security_name,
-                    'gate' => $gate,
+                    'inregistration' => null,
+                    'ingate' => null,
                 ]);
                 return redirect()->back()->with('success',"Leave Started for $rollno at $outtime");
             }
