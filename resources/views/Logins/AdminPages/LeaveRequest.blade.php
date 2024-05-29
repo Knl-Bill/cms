@@ -23,7 +23,7 @@
                 <a class="nav-link home-btn" id="home" href='{{route('AdminDashboard')}}'><i class="bi bi-house-door-fill custom-icon"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link profile-btn" id="profile"><i class="bi bi-person-fill custom-icon"></i></a>
+                <a class="nav-link profile-btn" id="profile" href='{{route('AdminProfile')}}'><i class="bi bi-person-fill custom-icon"></i></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link logout-btn" id="logout">Logout</a>
@@ -33,10 +33,10 @@
         </div>
     </nav>
     <div class="table-container">
-      <h1 class="heading">Leave Requests</h1>
       <div class="status">
-          <a href="{{ route('leavereqshist_admin') }}">See Leave History</a>
+          <a class="submit-btn" href="{{ route('leavereqshist_admin') }}" style="text-decoration:none">See Leave History</a>
       </div>
+      <h1 class="heading">LEAVE REQUESTS</h1>
       @if (Session::get('success'))
           <span class="text-safe" role="alert">
               {{ Session::get('success') }}
@@ -113,72 +113,78 @@
                 </tbody>
               </table>
               @if ($stud->image!=NULL)
-              <div>
-                  <img src="storage/{{$stud->image}}" alt="email screenshot" style="width:400px;height:100px;">
-              </div> 
-              @endif
-              
-              <div class="approval">
-                @if(session()->has('role'))
-                  <!-- <p>{{session('role')}}</p> -->
-                  @if(session('role')=="faculty")
-                    <div class="buttons">
-                      <h3>Faculty Advisor Approval</h3>
-                      @if($stud->faculty_adv==0)
-                        <form method="post" action="/LeaveRequestFaculty/{{$stud->rollno}}" enctype="multipart/form-data">
-                          @csrf
-                          <div class="approval">
-                            <div class="approval-btns">
-                              <input type="checkbox" id="faculty_checkbox" name="fac_acc" value="Accept" >
-                              <label>Accept</label>
+              <div class="ss-and-approval">
+                <div>
+                    <img src="storage/{{$stud->image}}" alt="email screenshot" style="width:400px;height:100px;margin:10px;">
+                </div> 
+                @endif
+                
+                <div class="approval">
+                  @if(session()->has('role'))
+                    <!-- <p>{{session('role')}}</p> -->
+                    @if(session('role')=="faculty")
+                      <div class="buttons">
+                        <div class="approval-text">
+                          <h4 class="font1">FACULTY ADVISOR APPROVAL:</h4>
+                        </div>
+                        @if($stud->faculty_adv==0)
+                          <form method="post" action="/LeaveRequestFaculty/{{$stud->rollno}}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="approval">
+                              <div class="approval-btns">
+                                <input type="radio" id="faculty_checkbox" name="fac_acc" value="Accept" >
+                                <label style="color: green; font-weight: bold;">Accept</label>
+                              </div>
+                              <div class="approval-btns">
+                                <input type="radio" id="faculty_checkbox" name="fac_acc" value="Decline">
+                                <label style="color: red; font-weight: bold;">Decline</label>
+                              </div>
+                              <div class="approval-btns">
+                                <input class="submit-btn" type="Submit" id="submit" value="Submit">
+                              </div>
                             </div>
-                            <div class="approval-btns">
-                              <input type="checkbox" id="faculty_checkbox" name="fac_dec" value="Decline">
-                              <label>Decline</label>
+                          </form>
+                          @elseif($stud->faculty_adv==1)
+                            <h5 style="color: green; font-weight: bold;">Approved</h5>
+                          @else
+                            <h5 style="color: red; font-weight: bold;">Declined</h5>
+                        @endif
+                      </div>
+                    @else
+                      <div class="buttons">
+                        @if($stud->faculty_adv==1)
+                          <h5 style="font-style: italic; color: #1625AD;">Faculty Advisor has Approved this request.</h5>
+                        @endif
+                        <div class="approval-text">
+                          <h4 class="font1">WARDEN APPROVAL:</h4>
+                        </div>
+                        @if($stud->warden==0)
+                          <form method="post" action="/LeaveRequestWarden/{{$stud->rollno}}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="approval">
+                              <div class="approval-btns">
+                                <input type="radio" id="warden_checkbox" name="war_acc" value="Accept">
+                                <label style="color: green; font-weight: bold;">Accept</label>
+                              </div>
+                              <div class="approval-btns">
+                                <input type="radio" id="warden_checkbox" name="war_acc" value="Decline">
+                                <label style="color: red; font-weight: bold;">Decline</label>
+                              </div>
+                              <div class="approval-btns">
+                                <input class="submit-btn" type="Submit" id="submit" value="Submit">
+                              </div>
                             </div>
-                            <div class="approval-btns">
-                              <input class="submit-btn" type="Submit" id="submit" value="Submit">
-                            </div>
-                          </div>
-                        </form>
-                        @elseif($stud->faculty_adv==1)
-                          <h5>Approved</h5>
-                        @else
-                          <h5>Declined</h5>
-                      @endif
-                    </div>
-                  @else
-                    <div class="buttons">
-                      @if($stud->faculty_adv==1)
-                        <h5>Faculty Advisor has Approved this request.</h5>
-                      @endif
-                      <h3>Warden Approval</h3>
-                      @if($stud->warden==0)
-                        <form method="post" action="/LeaveRequestWarden/{{$stud->rollno}}" enctype="multipart/form-data">
-                          @csrf
-                          <div class="approval-buttons">
-                            <div class="approval-btns">
-                              <input type="checkbox" id="warden_checkbox" name="war_acc" value="Accept">
-                              <label>Accept</label>
-                            </div>
-                            <div class="approval-btns">
-                              <input type="checkbox" id="warden_checkbox" name="war_dec" value="Decline">
-                              <label>Decline</label>
-                            </div>
-                            <div class="approval-btns">
-                              <input class="submit-btn" type="Submit" id="submit" value="Submit">
-                            </div>
-                          </div>
-                        </form>
-                        @elseif($stud->warden==1)
-                          <h5>Approved</h5>
-                        @else
-                          <h5>Declined</h5>
-                      @endif
-                    </div>
-                  @endif
-                @endif  
-              </div> 
+                          </form>
+                          @elseif($stud->warden==1)
+                            <h5 style="color: green; font-weight: bold;">Approved</h5>
+                          @else
+                            <h5 style="color: red; font-weight: bold;">Declined</h5>
+                        @endif
+                      </div>
+                    @endif
+                  @endif  
+                </div> 
+              </div>
             </div>  
           </div>
         </div>

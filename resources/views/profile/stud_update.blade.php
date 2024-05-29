@@ -8,7 +8,6 @@
     <script defer src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/profile.css">
-
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -245,6 +244,27 @@
         <button class="yes-button" id="confirmYes">Yes</button>
         <button class="no-button" id="confirmNo">No</button>
     </div>
+
+    <script src="assets/js/profile.js"></script>
+
+    <script>
+        document.getElementById('logout').addEventListener('click', function() {
+        // Make an AJAX Request to trigger the Logout function
+        fetch('/StudentLogout', { method: 'GET' })
+        .then(response => {
+                if (response.ok) {
+                    // If logout Successful, redirect to home page
+                    window.location.reload();
+                    window.location.href = '/';
+                } else {
+                    // If logout failed, handle error
+                    console.error('Logout Failed');
+                }
+            })
+        .catch(error => {
+                console.error('Error during logout', error);
+            });
+        });
+    </script>
 </body>
-<script src="assets/js/student_profile.js"></script>
 </html>

@@ -13,7 +13,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid custom-navbar">
           <img class="logo" src="assets/images/logo.webp" alt="logo">
-          <a class="navbar-brand custom-brand" href="#">NIT Puducherry</a>
+          <!-- <a class="navbar-brand custom-brand" href="#">NIT Puducherry</a> -->
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -30,7 +30,7 @@
         </div>
     </nav>
     <div class="dashboard-text">
-        <div class="user">
+        <div class="user" style="font-size: 24px;">
 
         </div>
         <h1 class="heading font">DASHBOARD</h1>
@@ -56,7 +56,7 @@
 
         // Fetch the username from the Login Session
         fetch('/StudentSession').then(response => response.text()).then(data => {
-            document.querySelector('.user').innerHTML = '<h4>Welcome,</h4>' + data;
+            document.querySelector('.user').innerHTML = '<span class="welcome">Welcome</span>, ' + data;
         });
         document.getElementById('logout').addEventListener('click',function() {
         // Make an AJAX Request to trigger the Logout function

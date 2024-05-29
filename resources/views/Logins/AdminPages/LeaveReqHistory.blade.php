@@ -23,7 +23,7 @@
                 <a class="nav-link home-btn" id="home" href='{{route('AdminDashboard')}}'><i class="bi bi-house-door-fill custom-icon"></i></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link profile-btn" id="profile"><i class="bi bi-person-fill custom-icon"></i></a>
+                <a class="nav-link profile-btn" id="profile" href='{{route('AdminProfile')}}'><i class="bi bi-person-fill custom-icon"></i></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link logout-btn" id="logout">Logout</a>

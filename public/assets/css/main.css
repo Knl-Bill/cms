@@ -225,7 +225,10 @@
     }
 }
 
-
+.welcome {
+    color: #1625AD;
+    font-size: 24px;
+}
 /* Forgot Password */
 
 .box-container {
@@ -250,17 +253,28 @@
 }
 .approval {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 }
 .approval-btns {
     display: inline-flex;
     margin: 0 10px;
 }  
-.approval-btns input[type="checkbox"] {
+.approval-btns input[type="radio"] {
     margin-right: 5px;
 }
-
+.ss-and-approval {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.buttons{
+    display: flex;
+    gap:10px;
+    flex-direction: column;
+    align-items: center;
+}
 
 /* leave request table pages */
 .table-container {
@@ -289,11 +303,6 @@
   justify-content: center;
   font-family: "Helvetica Neue",Helvetica,Arial;
 } */
-.buttons{
-  display: flex;
-  gap:10px;
-  flex-direction: column;
-}
 
 /* OutingHistory.css */
 
