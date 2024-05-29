@@ -20,7 +20,7 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav custom-nav-items">
               <li class="nav-item">
-                <a class="nav-link profile-btn" id="profile"><i class="bi bi-person-fill custom-icon"></i></a>
+                <a class="nav-link profile-btn" id="profile" href='{{route('AdminProfile')}}'><i class="bi bi-person-fill custom-icon"></i></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link logout-btn" id="logout">Logout</a>
@@ -30,7 +30,7 @@
         </div>
     </nav>
     <div class="dashboard-text">
-        <div class="user">
+        <div class="user" style="font-size: 24px;">
     
         </div>
         @if(Session::has('message'))
@@ -54,7 +54,7 @@
     <script>
         fetch('/AdminSession').then(response => response.text()).then(data => {
                 // Update the user name in the HTML
-                document.querySelector('.user').innerHTML = '<h4>Welcome,</h4>' + data;
+                document.querySelector('.user').innerHTML = '<span class="welcome">Welcome</span>, ' + data;
         });
 
         document.getElementById('logout').addEventListener('click', function() {

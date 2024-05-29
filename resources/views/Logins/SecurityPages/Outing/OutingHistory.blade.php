@@ -20,7 +20,7 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav custom-nav-items">
               <li class="nav-item">
-                <a class="nav-link profile-btn" id="profile"><i class="bi bi-person-fill custom-icon"></i></a>
+                <a class="nav-link profile-btn" id="profile" href='{{route('SecurityProfile')}}'><i class="bi bi-person-fill custom-icon"></i></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link logout-btn" id="logout">Logout</a>

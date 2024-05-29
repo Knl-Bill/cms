@@ -36,10 +36,10 @@
             <img src="assets/images/leave.webp" alt="Leave Image" class="image" width="800px">
         </div>
         <div class="form-container">
-            <h1 class="heading font">LEAVE FORM</h1>
-            <div class="status">
-                <a class="leave-status" href="{{ route('pendingleavereqshist') }}">See Your Leave Status</a>
+            <div class="form-group button">
+                <a class="submit-btn" href="{{ route('pendingleavereqshist') }}" style="text-decoration:none">See Your Leave Status</a>
             </div>
+            <h1 class="heading font">LEAVE FORM</h1>
             @if (Session::get('success'))
                 <span class="text-safe" role="alert">
                     {{ Session::get('success') }}
