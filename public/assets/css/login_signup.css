@@ -103,6 +103,11 @@
     display: flex;
     justify-content: center;
 }
+.button{
+    button, input{
+        width: 225px;
+    }
+}
 .submit-btn {
     background-color: #1625AD;
     color: white;

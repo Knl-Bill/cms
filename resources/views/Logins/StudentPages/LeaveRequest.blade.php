@@ -37,7 +37,10 @@
         </div>
         <div class="form-container">
             <div class="form-group button">
-                <a class="submit-btn" href="{{ route('pendingleavereqshist') }}" style="text-decoration:none">See Your Leave Status</a>
+                <button class="form-group button submit-btn" id="status">See your Leave Status</button>
+            </div>
+            <div class="form-group button">
+                <button class="form-group button submit-btn" id="leavehistory">Leave History</button>
             </div>
             <h1 class="heading font">LEAVE FORM</h1>
             @if (Session::get('success'))
@@ -110,7 +113,15 @@
 
             document.getElementById('phoneno').value = data.phoneno;
             document.getElementById('phoneno').placeholder = data.phoneno;
-        })
+        });
+
+        document.getElementById('status').addEventListener('click', function() {
+            window.location.href = '{{route('pendingleavereqshist')}}'
+        });
+
+        document.getElementById('leavehistory').addEventListener('click', function() {
+            window.location.href = '{{route('GetLeaves')}}'
+        });
     </script>
     <script>
         document.getElementById('logout').addEventListener('click',function() {
