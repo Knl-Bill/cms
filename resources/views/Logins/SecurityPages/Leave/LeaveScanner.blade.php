@@ -76,7 +76,7 @@
         <div class="inputs" id="Interactive" class="viewport">
             <video id="video" autoplay></video>
         </div>
-        <div id="ScannerMessage"></div>
+        <div id="ScannerMessage" style="color:green;" class="text-center"></div>
         <form id="scannerForm" method="POST" action="/InsertScannerLeave">
             @csrf
             <div class="form-group">
@@ -117,14 +117,14 @@
 
                     // Set default selection to the first camera
                     cameraSelect.value = 0;
-                    cameraSelect.dispatchEvent(new Event('change'));
-
-                    cameraSelect.addEventListener('change', async (event) => {
+                    // Instead of using dispatchEvent to trigger the 'change' event,
+                    // directly call the change event handler function.
+                    async function handleCameraChange(event) {
                         const selectedDeviceId = devices[event.target.value].deviceId;
                         await codeReader.reset();
                         codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
                             if (!formSubmitted && result) {
-                                console.log('Barcode detected: ', result.text);
+                                //console.log('Barcode detected: ', result.text);
                                 if (result.text.length === 18) { // assuming the roll no is 9 characters long
                                     const detectedRollNo = result.text;
                                     scannerMessage.innerText = 'Detected Roll No: ' + detectedRollNo;
@@ -139,7 +139,34 @@
                                 scannerMessage.innerText = 'Error: ' + err.message;
                             }
                         });
-                    });
+                    }
+                    cameraSelect.addEventListener('change', handleCameraChange);
+                    // Call the event handler function directly instead of dispatching an event.
+                    handleCameraChange({ target: cameraSelect });
+
+                    // cameraSelect.dispatchEvent(new Event('change'));
+
+                    // cameraSelect.addEventListener('change', async (event) => {
+                    //     const selectedDeviceId = devices[event.target.value].deviceId;
+                    //     await codeReader.reset();
+                    //     codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+                    //         if (!formSubmitted && result) {
+                    //             //console.log('Barcode detected: ', result.text);
+                    //             if (result.text.length === 18) { // assuming the roll no is 9 characters long
+                    //                 const detectedRollNo = result.text;
+                    //                 scannerMessage.innerText = 'Detected Roll No: ' + detectedRollNo;
+                    //                 rollnoInput.value = detectedRollNo;
+                    //                 return;
+                    //             } else {
+                    //                 scannerMessage.innerText = 'Invalid barcode detected. Please try again.';
+                    //             }
+                    //         }
+                    //         if (err && !(err instanceof ZXing.NotFoundException)) {
+                    //             console.error(err);
+                    //             scannerMessage.innerText = 'Error: ' + err.message;
+                    //         }
+                    //     });
+                    // });
                 } else {
                     scannerMessage.innerText = 'No video input devices found.';
                 }

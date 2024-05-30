@@ -51,7 +51,7 @@
                 <tr>
                     <td>{{$outing->rollno}}</td>
                     <td>{{date('d/m/Y h:i a',strtotime($outing->outtime))}}</td>
-                    <td>{{date('d/m/Y h:i a',strtotime($outing->intime))}}</td>
+                    <td>{{$outing->intime== NULL?NULL: date('d/m/Y h:i a',strtotime($outing->intime))}}</td>
                     <td>{{$outing->security}}</td>
                 </tr>
                 @endforeach
