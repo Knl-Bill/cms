@@ -16,19 +16,21 @@
           <img class="logo" src="assets/images/logo.webp" alt="logo">
         </div>
     </nav>
-    <div class="container">
-      <div class="item">
-          <img src="assets/images/admin.webp" alt="Admin" height="300px">
-          <button id="AdminId" class="big-btn">Admin Login</button>
-      </div>
-      <div class="item">
-          <img src="assets/images/student.webp" alt="Student" height="300px">
-          <button id="StudentId" class="big-btn">Student Login</button>
-      </div>
-      <div class="item">
-          <img src="assets/images/security.webp" alt="Security" height="300px">
-          <button id="SecurityId" class="big-btn">Security Login</button>
-      </div>        
+    <div class="main-container">
+        <div class="container">
+        <div class="item">
+            <img src="assets/images/admin.webp" alt="Admin" height="300px">
+            <button id="AdminId" class="big-btn">Admin Login</button>
+        </div>
+        <div class="item">
+            <img src="assets/images/student.webp" alt="Student" height="300px">
+            <button id="StudentId" class="big-btn">Student Login</button>
+        </div>
+        <div class="item">
+            <img src="assets/images/security.webp" alt="Security" height="300px">
+            <button id="SecurityId" class="big-btn">Security Login</button>
+        </div>        
+        </div>
     </div>
     <script>
         document.getElementById('AdminId').addEventListener('click', function() {

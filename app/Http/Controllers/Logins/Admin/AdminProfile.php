@@ -81,8 +81,7 @@ class AdminProfile extends Controller
                 ->where('email', $email)
                 ->update(['email' => $request->new_email]);
             
-            if(Session::get('role')=="faculty")
-            {
+
                 DB::table('students')
                 ->where('faculty_advisor', $email)
                 ->update(['faculty_advisor' => $request->new_email]);
@@ -94,9 +93,7 @@ class AdminProfile extends Controller
                 DB::table('leavereq_histories')
                 ->where('faculty_email', $email)
                 ->update(['faculty_email' => $request->new_email]);
-            }
-            else if (Session::get('role')=="warden")
-            {
+
                 DB::table('students')
                 ->where('warden', $email)
                 ->update(['warden' => $request->new_email]);
@@ -108,7 +105,6 @@ class AdminProfile extends Controller
                 DB::table('leavereq_histories')
                 ->where('warden_email', $email)
                 ->update(['warden_email' => $request->new_email]);
-            }
             return back()->with('success',"Success! Please Logout & Login Again to refresh details!");
 
         }
