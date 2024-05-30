@@ -98,6 +98,15 @@ class LeaveRequest extends Controller
         $students = DB::select($stmt);
         return view('Logins.StudentPages.PendingLeaveRequest',['students'=>$students]);
     }
-
+    public function GetLeaves()
+    {
+        $student = Session::get('user');
+        if($student)
+        {
+            $rollno = $student->rollno;
+            $LeaveHistory = DB::table('leavehistory')->where('rollno',$rollno)->orderBy('outtime','desc')->get();
+            return view('Logins.StudentPages.LeaveHistory',['LeaveHistory' => $LeaveHistory]);
+        }
+    }
 
 }

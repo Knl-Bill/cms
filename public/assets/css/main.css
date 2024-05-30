@@ -79,6 +79,9 @@
 .item {
     text-align: center;
     margin: 20px;
+    button{
+        width: 225px;
+    }
 }
 .item img {
     display: block;

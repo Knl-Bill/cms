@@ -107,6 +107,7 @@ Route::post('/InsertLeaveRequest',[LeaveRequest::class,'InsertLeaveRequest'])->n
 Route::get('/DisabledDetails',[LeaveRequest::class,'DisabledDetails'])->name('DisabledDetails');
 Route::get('/leavereqshist', [LeaveRequest::class,'show_leave_det'])->name('leavereqshist');
 Route::get('/pendingleavereqshist', [LeaveRequest::class,'show_pending_leave_det'])->name('pendingleavereqshist');
+Route::get('/GetLeaves',[LeaveRequest::class,'GetLeaves'])->name('GetLeaves');
 Route::post('/signup', [StudentController::class, 'insert'])->name('signup');
 Route::get('/main', [StudentController::class,'signup'])->name('signup');
 
