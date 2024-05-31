@@ -17,7 +17,11 @@ class LeaveRequest extends Controller
 {
     public function LeaveRequestPage()
     {
-        return view('Logins.StudentPages.LeaveRequest');
+        $student = Session::get('user');
+        if($student)
+            return view('Logins.StudentPages.LeaveRequest');
+        else
+            return view('/');
     }
     public function InsertLeaveRequest(Request $request)
     {

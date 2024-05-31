@@ -67,8 +67,13 @@ class SecurityLogin extends Controller
     public function SecurityProfile()
     {
         $user = Session::get('user');
-        $stmt="select * from security_logins where phoneno='". $user->phoneno ."';"; 
-        $students = DB::select($stmt);
-        return view('Logins.SecurityPages.Security_Profile',['students'=>$students]);
+        if($user)
+        {
+            $stmt="select * from security_logins where phoneno='". $user->phoneno ."';"; 
+            $students = DB::select($stmt);
+            return view('Logins.SecurityPages.Security_Profile',['students'=>$students]);
+        }
+        else
+            return view('/');
     }
 }
